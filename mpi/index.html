@@ -321,9 +321,10 @@
       <li><a href="#s2">2. Why Use AI?</a></li>
       <li><a href="#s3">3. How the AI Works</a></li>
       <li><a href="#s4">4. Key Advantages</a></li>
-      <li><a href="#s5">5. Project Lifecycle</a></li>
-      <li><a href="#s6">6. Use Case: Connecting Rod</a></li>
-      <li><a href="#s7">7. FAQ</a></li>
+      <li><a href="#s5">5. System Overview</a></li>
+      <li><a href="#s6">6. Project Lifecycle</a></li>
+      <li><a href="#s7">7. Use Case: Connecting Rod</a></li>
+      <li><a href="#s8">8. FAQ</a></li>
     </ol>
   </aside>
 
@@ -458,10 +459,144 @@
       </div>
     </section>
 
-    <!-- S5 -->
+    <!-- S5 BLOCK DIAGRAM -->
     <section class="section" id="s5">
       <div class="section-num">Section 5</div>
+      <h2>System Overview</h2>
+
+      <p>The PIXIQ system connects directly into your existing MPI line. Here is how the components fit together — from the part on the line to the operator screen and factory PLC.</p>
+
+      <!-- Block diagram built in pure HTML/CSS — no external dependencies -->
+      <div style="overflow-x:auto; margin: 28px 0;">
+        <div style="min-width:560px; padding: 8px 0;">
+
+          <!-- ROW 1: MPI Station -->
+          <div style="display:flex; align-items:stretch; gap:0; margin-bottom:0;">
+
+            <!-- Part / MPI machine -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px; width:130px; flex-shrink:0;">
+              <div style="background:#fff3e0; border:2px solid #f57c00; border-radius:10px; padding:14px 10px; text-align:center; width:100%;">
+                <div style="font-size:22px; margin-bottom:4px;">🔩</div>
+                <div style="font-size:12px; font-weight:700; color:#e65100;">MPI Station</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">Magnetisation<br/>+ Particles</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="display:flex; align-items:center; padding:0 6px; color:#aaa; font-size:20px; flex-shrink:0;">→</div>
+
+            <!-- Proximity Sensor -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px; width:110px; flex-shrink:0;">
+              <div style="background:#fce4ec; border:2px solid #e91e63; border-radius:10px; padding:14px 10px; text-align:center; width:100%;">
+                <div style="font-size:22px; margin-bottom:4px;">📡</div>
+                <div style="font-size:12px; font-weight:700; color:#880e4f;">Proximity<br/>Sensor</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">Part detected<br/>→ trigger</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="display:flex; align-items:center; padding:0 6px; color:#aaa; font-size:20px; flex-shrink:0;">→</div>
+
+            <!-- Cameras -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px; width:110px; flex-shrink:0;">
+              <div style="background:#e8f5e9; border:2px solid #388e3c; border-radius:10px; padding:14px 10px; text-align:center; width:100%;">
+                <div style="font-size:22px; margin-bottom:4px;">📷</div>
+                <div style="font-size:12px; font-weight:700; color:#1b5e20;">UV Cameras</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">High-res<br/>multi-angle</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="display:flex; align-items:center; padding:0 6px; color:#aaa; font-size:20px; flex-shrink:0;">→</div>
+
+            <!-- PixIQ Controller -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px; width:130px; flex-shrink:0;">
+              <div style="background:#e3f2fd; border:3px solid #0f3460; border-radius:10px; padding:14px 10px; text-align:center; width:100%;">
+                <div style="font-size:22px; margin-bottom:4px;">🧠</div>
+                <div style="font-size:12px; font-weight:700; color:#0f3460;">PIXIQ<br/>Controller</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">AI inference<br/>&lt;100ms</div>
+              </div>
+            </div>
+
+            <!-- Arrow -->
+            <div style="display:flex; align-items:center; padding:0 6px; color:#aaa; font-size:20px; flex-shrink:0;">→</div>
+
+            <!-- HMI -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px; width:110px; flex-shrink:0;">
+              <div style="background:#f3e5f5; border:2px solid #7b1fa2; border-radius:10px; padding:14px 10px; text-align:center; width:100%;">
+                <div style="font-size:22px; margin-bottom:4px;">🖥️</div>
+                <div style="font-size:12px; font-weight:700; color:#4a148c;">Operator<br/>HMI</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">Live results<br/>+ images</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- DOWN ARROW from PixIQ Controller -->
+          <div style="display:flex; margin-top:0;">
+            <!-- spacers to align under PixIQ Controller -->
+            <div style="width:130px; flex-shrink:0;"></div>
+            <div style="width:32px; flex-shrink:0;"></div>
+            <div style="width:110px; flex-shrink:0;"></div>
+            <div style="width:32px; flex-shrink:0;"></div>
+            <div style="width:110px; flex-shrink:0;"></div>
+            <div style="width:32px; flex-shrink:0;"></div>
+            <!-- arrow down centered on PixIQ Controller (width 130) -->
+            <div style="width:130px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; padding:4px 0;">
+              <div style="width:2px; height:28px; background:#0f3460;"></div>
+              <div style="color:#0f3460; font-size:18px; line-height:1;">↓</div>
+            </div>
+          </div>
+
+          <!-- ROW 2: PLC + Cloud under PixIQ -->
+          <div style="display:flex; margin-top:0;">
+            <!-- spacers -->
+            <div style="width:130px; flex-shrink:0;"></div>
+            <div style="width:32px; flex-shrink:0;"></div>
+            <div style="width:110px; flex-shrink:0;"></div>
+            <div style="width:32px; flex-shrink:0;"></div>
+            <div style="width:110px; flex-shrink:0;"></div>
+            <div style="width:32px; flex-shrink:0;"></div>
+
+            <!-- PLC + Cloud side by side under controller -->
+            <div style="width:130px; flex-shrink:0; display:flex; flex-direction:column; gap:10px; align-items:center;">
+
+              <div style="background:#fff3e0; border:2px solid #f57c00; border-radius:10px; padding:12px 10px; text-align:center; width:100%;">
+                <div style="font-size:20px; margin-bottom:3px;">⚙️</div>
+                <div style="font-size:12px; font-weight:700; color:#e65100;">Factory PLC</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">PASS / FAIL<br/>→ rejection gate</div>
+              </div>
+
+              <div style="background:#e1f5fe; border:2px dashed #0288d1; border-radius:10px; padding:12px 10px; text-align:center; width:100%;">
+                <div style="font-size:20px; margin-bottom:3px;">☁️</div>
+                <div style="font-size:12px; font-weight:700; color:#01579b;">Cloud</div>
+                <div style="font-size:11px; color:#888; margin-top:3px;">Model updates<br/>+ analytics</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div style="margin-top:24px; display:flex; flex-wrap:wrap; gap:16px; font-size:12px; color:#888; border-top:1px solid var(--border); padding-top:14px;">
+            <span><span style="color:#aaa; font-size:16px;">→</span> Data / image flow</span>
+            <span><span style="border:2px solid #0f3460; border-radius:4px; padding:1px 6px; font-size:11px; color:#0f3460;">Bold border</span> = PIXIQ components</span>
+            <span><span style="border:2px dashed #0288d1; border-radius:4px; padding:1px 6px; font-size:11px; color:#0288d1;">Dashed</span> = optional cloud connectivity</span>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="margin-top:4px;">
+        The PIXIQ Controller sits at the centre — it receives images from the cameras, runs the AI, and simultaneously signals the factory PLC (to open or close the rejection gate) and updates the operator HMI. The cloud connection is optional and used for model updates and fleet-wide analytics.
+      </p>
+
+    </section>
+
+    <!-- S6 -->
+    <section class="section" id="s6">
+      <div class="section-num">Section 6</div>
       <h2>Project Lifecycle: What to Expect</h2>
+
 
       <p>From first conversation to live deployment, a typical PIXIQ MPI project follows a clear, structured path. Each phase has defined milestones and data requirements so you always know where you stand.</p>
 
@@ -532,9 +667,9 @@
       </ul>
     </section>
 
-    <!-- S6 -->
-    <section class="section" id="s6">
-      <div class="section-num">Section 6</div>
+    <!-- S7 -->
+    <section class="section" id="s7">
+      <div class="section-num">Section 7</div>
       <h2>Use Case: Connecting Rod Inspection</h2>
 
       <p>
@@ -623,9 +758,9 @@
       </div>
     </section>
 
-    <!-- S7 FAQ -->
-    <section class="section" id="s7">
-      <div class="section-num">Section 7</div>
+    <!-- S8 FAQ -->
+    <section class="section" id="s8">
+      <div class="section-num">Section 8</div>
       <h2>Frequently Asked Questions</h2>
 
       <div class="faq-item">
