@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DhvaniAI Technologies — White Papers</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f8f9fa;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+      color: white;
+      padding: 48px 40px 40px;
+      border-bottom: 4px solid #e94560;
+    }
+
+    header .logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #e94560;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 16px;
+      color: #a8b2c8;
+      max-width: 600px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #6c757d;
+      margin-bottom: 20px;
+    }
+
+    .paper-card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 20px;
+      border: 1px solid #e8ecf0;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .paper-card:hover {
+      box-shadow: 0 8px 32px rgba(15, 52, 96, 0.12);
+      border-color: #0f3460;
+    }
+
+    .paper-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .icon-ndt { background: #fff0f0; }
+    .icon-cv  { background: #f0f4ff; }
+    .icon-ai  { background: #f0fff4; }
+
+    .paper-meta {
+      flex: 1;
+    }
+
+    .paper-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .tag-ndt  { background: #fee2e2; color: #b91c1c; }
+    .tag-cv   { background: #dbeafe; color: #1d4ed8; }
+    .tag-ai   { background: #d1fae5; color: #065f46; }
+
+    .paper-meta h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #0f3460;
+    }
+
+    .paper-meta p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .paper-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .paper-footer span { display: flex; align-items: center; gap: 5px; }
+
+    .read-link {
+      margin-left: auto;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f3460;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .read-link svg { transition: transform 0.2s; }
+    .paper-card:hover .read-link svg { transform: translateX(4px); }
+
+    .coming-soon {
+      opacity: 0.55;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .badge-soon {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #f3f4f6;
+      color: #6b7280;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 13px;
+      color: #aaa;
+      border-top: 1px solid #e8ecf0;
+      margin-top: 20px;
+    }
+
+    footer a { color: #0f3460; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DhvaniAI Technologies</div>
+  <h1>Technical White Papers</h1>
+  <p>In-depth technical resources on AI-powered industrial inspection, machine vision, and process automation.</p>
+</header>
+
+<main>
+  <p class="section-label">Published</p>
+
+  <a class="paper-card" href="mpi/index.html">
+    <div class="paper-icon icon-ndt">🔬</div>
+    <div class="paper-meta">
+      <span class="paper-tag tag-ndt">Non-Destructive Testing</span>
+      <h2>Machine Vision in Magnetic Particle Inspection</h2>
+      <p>How AI-powered automated defect detection transforms MPI workflows — covering system architecture, anomaly detection models, factory integration, and a detailed connecting rod inspection case study.</p>
+      <div class="paper-footer">
+        <span>📅 October 2025</span>
+        <span>📖 ~20 min read</span>
+        <span class="read-link">
+          Read paper
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </div>
+  </a>
+
+  <p class="section-label" style="margin-top:40px;">Coming Soon</p>
+
+  <div class="paper-card coming-soon">
+    <div class="paper-icon icon-cv">📷</div>
+    <div class="paper-meta">
+      <span class="paper-tag tag-cv">Computer Vision</span>
+      <h2>Real-Time Defect Detection with TensorRT <span class="badge-soon">Coming Soon</span></h2>
+      <p>Optimizing deep learning inference for sub-40ms edge deployment on NVIDIA Jetson and industrial x86 platforms.</p>
+      <div class="paper-footer">
+        <span>📅 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="paper-card coming-soon">
+    <div class="paper-icon icon-ai">🤖</div>
+    <div class="paper-meta">
+      <span class="paper-tag tag-ai">AI &amp; Machine Learning</span>
+      <h2>Anomaly Detection for Zero-Defect Manufacturing <span class="badge-soon">Coming Soon</span></h2>
+      <p>Training on good parts only — practical guide to deploying anomaly detection models across high-volume production lines.</p>
+      <div class="paper-footer">
+        <span>📅 2026</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 DhvaniAI Technologies &nbsp;·&nbsp;
+  <a href="https://www.dhvaniai.com">www.dhvaniai.com</a> &nbsp;·&nbsp;
+  <a href="mailto:info@dhvaniai.com">info@dhvaniai.com</a>
+</footer>
+
+</body>
+</html>
