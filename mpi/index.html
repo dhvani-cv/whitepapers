@@ -665,6 +665,18 @@
         <li><strong>Total timeline from installation to autonomous deployment: 8–14 weeks</strong>, depending on how quickly defective parts are collected on your production line.</li>
         <li><strong>Data collection is the critical path.</strong> In high-volume lines where defects are common, Phases 2–3 can close in days. In low-defect environments it may take longer — but Phase 1 keeps the system useful throughout.</li>
       </ul>
+
+      <div class="callout callout-amber">
+        <strong>Managing the Transition Period (Phases 1 &amp; 2)</strong><br/><br/>
+        During the early weeks, the unsupervised model flags anything that deviates from "good" — which means the false alarm rate is intentionally high. This is by design, not a flaw: the system is casting a wide net to ensure nothing is missed while it learns your specific production environment.<br/><br/>
+        In practice, operators can expect to review <strong>5–15 flagged parts per shift</strong> during Phase 1, dropping significantly as the model baselines. To manage this workload without fatigue:
+        <ul style="margin-top:10px; margin-bottom:0; padding-left:20px;">
+          <li>Flagged parts are routed to a <strong>dedicated manual review station</strong>, not held up at the inspection point — the line keeps moving.</li>
+          <li>The HMI shows the exact region of interest the AI flagged, so the operator makes a quick confirm/dismiss decision rather than re-inspecting the whole part.</li>
+          <li>Review burden typically drops to <strong>under 3 parts per shift</strong> by the end of Phase 2 as confirmed good-part variation is absorbed into the model.</li>
+          <li>All operator decisions during this period are logged and fed back to improve the next training cycle.</li>
+        </ul>
+      </div>
     </section>
 
     <!-- S7 -->
@@ -811,6 +823,26 @@
       <div class="faq-item">
         <div class="faq-q">Does the operator lose control over the process?</div>
         <div class="faq-a">Not at all. The operator has a full interface (HMI) that allows them to manually capture images, adjust settings, and — most importantly — override any AI decision if they see a problem. A human is always in control.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does the system handle reflections from the wet fluorescent carrier liquid?</div>
+        <div class="faq-a">
+          Specular reflections from the wet suspension are one of the primary imaging challenges in fluorescent MPI, and the system is designed around this from the ground up. We address it at two levels:
+          <ul style="margin-top:8px; margin-bottom:0; padding-left:20px;">
+            <li><strong>Lighting geometry:</strong> Illumination is angled to minimise direct specular returns on the camera sensor. Diffused light sources spread the reflection away from the optical axis.</li>
+            <li><strong>AI robustness:</strong> The model is trained exclusively on images captured under your actual wet-inspection conditions, so it learns to distinguish genuine particle accumulation at a defect from the background shimmer of the liquid carrier. Reflections appear as a consistent, repeating pattern; true defect indications do not — and the AI exploits this difference.</li>
+          </ul>
+          Shadow blind spots in complex 3D profiles are handled by positioning multiple cameras at complementary angles, ensuring every critical surface area is covered by at least one clear line of sight.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the false alarm rate during the early phases, and how much work does that create for operators?</div>
+        <div class="faq-a">
+          During Phase 1 (anomaly baseline), the false alarm rate is intentionally elevated — the system flags anything unusual while it is still learning the normal variation of your specific parts and process. Operators can expect to review roughly <strong>5–15 flagged parts per shift</strong> in the first few weeks. This drops sharply as the model absorbs confirmed good-part variation, typically falling to <strong>under 3 per shift</strong> by the end of Phase 2.<br/><br/>
+          Critically, this review burden is designed to be low-effort: the HMI routes flagged parts to a dedicated station and highlights only the region the AI questioned. The operator makes a quick confirm/dismiss decision — not a full re-inspection. Every decision is logged and fed back into the next training cycle, so the operator's time during this period directly accelerates the model's improvement.
+        </div>
       </div>
 
       <div class="callout callout-amber" style="margin-top:28px;">
