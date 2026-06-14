@@ -4,42 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Machine Vision in MPI — DhvaniAI White Paper</title>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --brand:    #0f3460;
-      --accent:   #e94560;
-      --text:     #1a1a2e;
-      --muted:    #555e6d;
-      --border:   #e2e8f0;
-      --bg:       #f8f9fa;
-      --white:    #ffffff;
+      --brand:  #0f3460;
+      --accent: #e94560;
+      --text:   #1a1a2e;
+      --muted:  #555e6d;
+      --border: #e2e8f0;
+      --bg:     #f8f9fa;
+      --white:  #ffffff;
     }
 
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
-    /* ── TOP NAV ── */
+    /* ── NAV ── */
     .topnav {
       background: var(--brand);
       padding: 14px 40px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-size: 13px;
     }
-
-    .topnav a {
-      color: #a8b2c8;
-      text-decoration: none;
-    }
-
+    .topnav a { color: #a8b2c8; text-decoration: none; }
     .topnav a:hover { color: white; }
     .topnav .sep { color: #4a5568; }
     .topnav .current { color: white; font-weight: 600; }
@@ -51,29 +45,26 @@
       padding: 56px 40px 48px;
       border-bottom: 4px solid var(--accent);
     }
-
     .hero-tag {
       display: inline-block;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      background: rgba(233, 69, 96, 0.2);
+      background: rgba(233,69,96,0.2);
       color: #f87091;
       border: 1px solid rgba(233,69,96,0.4);
       padding: 4px 12px;
       border-radius: 20px;
       margin-bottom: 16px;
     }
-
     .hero h1 {
       font-size: 34px;
       font-weight: 700;
       line-height: 1.25;
-      max-width: 720px;
+      max-width: 740px;
       margin-bottom: 16px;
     }
-
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
@@ -82,34 +73,30 @@
       color: #a8b2c8;
       margin-bottom: 20px;
     }
-
-    .hero-meta span { display: flex; align-items: center; gap: 6px; }
-
     .hero-summary {
-      font-size: 15px;
+      font-size: 16px;
       color: #c8d0e0;
       max-width: 720px;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     /* ── LAYOUT ── */
     .layout {
       display: flex;
-      max-width: 1100px;
+      max-width: 1060px;
       margin: 0 auto;
       padding: 40px 24px;
       gap: 48px;
       align-items: flex-start;
     }
 
-    /* ── SIDEBAR TOC ── */
+    /* ── TOC ── */
     .toc {
-      width: 230px;
+      width: 210px;
       flex-shrink: 0;
       position: sticky;
       top: 24px;
     }
-
     .toc-title {
       font-size: 11px;
       font-weight: 700;
@@ -118,14 +105,8 @@
       color: #6c757d;
       margin-bottom: 12px;
     }
-
-    .toc ol {
-      list-style: none;
-      padding: 0;
-    }
-
+    .toc ol { list-style: none; padding: 0; }
     .toc li { margin-bottom: 2px; }
-
     .toc a {
       display: block;
       font-size: 13px;
@@ -136,31 +117,20 @@
       border-left: 2px solid transparent;
       transition: all 0.15s;
     }
-
     .toc a:hover {
       color: var(--brand);
       background: #eef1f7;
       border-left-color: var(--brand);
     }
 
-    .toc .toc-sub a {
-      font-size: 12px;
-      padding-left: 20px;
-      color: #8898aa;
-    }
-
     /* ── CONTENT ── */
-    .content {
-      flex: 1;
-      min-width: 0;
-    }
+    .content { flex: 1; min-width: 0; }
 
-    /* sections */
     .section {
       background: var(--white);
       border-radius: 12px;
       padding: 40px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       border: 1px solid var(--border);
     }
 
@@ -186,7 +156,7 @@
       font-size: 17px;
       font-weight: 700;
       color: var(--brand);
-      margin: 28px 0 12px;
+      margin: 28px 0 10px;
     }
 
     h4 {
@@ -198,54 +168,49 @@
 
     p { margin-bottom: 14px; color: var(--muted); font-size: 15px; }
 
-    ul, ol {
-      padding-left: 22px;
-      margin-bottom: 14px;
-    }
-
-    li { font-size: 15px; color: var(--muted); margin-bottom: 5px; }
-
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { font-size: 15px; color: var(--muted); margin-bottom: 6px; }
     strong { color: var(--text); font-weight: 600; }
 
-    /* ── TABLES ── */
-    .table-wrap { overflow-x: auto; margin: 20px 0; }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
+    /* ── PHASE CARDS ── */
+    .phase-list { margin: 20px 0; }
+    .phase-card {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
     }
-
-    thead tr {
+    .phase-card:last-child { border-bottom: none; }
+    .phase-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       background: var(--brand);
       color: white;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
-
-    thead th {
-      padding: 12px 16px;
-      text-align: left;
-      font-weight: 600;
-      white-space: nowrap;
+    .phase-body { flex: 1; }
+    .phase-body strong { display: block; font-size: 15px; color: var(--brand); margin-bottom: 4px; }
+    .phase-meta {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
     }
+    .phase-body p { margin: 0; font-size: 14px; }
 
-    tbody tr:nth-child(even) { background: #f7f9fc; }
-    tbody tr:hover { background: #eef1f7; }
-
-    td {
-      padding: 11px 16px;
-      border-bottom: 1px solid var(--border);
-      color: var(--muted);
-      vertical-align: top;
-    }
-
-    /* ── STAT CARDS ── */
+    /* ── STAT GRID ── */
     .stat-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
       margin: 24px 0;
     }
-
     .stat-card {
       background: linear-gradient(135deg, var(--brand), #16213e);
       border-radius: 10px;
@@ -253,61 +218,52 @@
       color: white;
       text-align: center;
     }
+    .stat-value { font-size: 28px; font-weight: 800; color: #7dd3fc; display: block; }
+    .stat-label { font-size: 12px; color: #a8b2c8; margin-top: 4px; }
 
-    .stat-value {
-      font-size: 28px;
-      font-weight: 800;
-      color: #7dd3fc;
-      display: block;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: #a8b2c8;
-      margin-top: 4px;
-    }
-
-    /* ── CALLOUT BOXES ── */
+    /* ── CALLOUTS ── */
     .callout {
       border-radius: 10px;
-      padding: 18px 20px;
+      padding: 16px 20px;
       margin: 20px 0;
       font-size: 14px;
       border-left: 4px solid;
+      line-height: 1.6;
     }
-
     .callout-blue  { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
     .callout-green { background: #f0fdf4; border-color: #22c55e; color: #166534; }
     .callout-amber { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
-
     .callout strong { color: inherit; }
 
-    /* ── MERMAID ── */
-    .diagram-wrap {
-      background: #fafbfc;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px 16px;
-      margin: 24px 0;
-      overflow-x: auto;
-      text-align: center;
-    }
+    /* ── TABLES ── */
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead tr { background: var(--brand); color: white; }
+    thead th { padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #eef1f7; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; }
 
-    /* ── METRIC COMPARISON ── */
+    /* ── METRIC ROWS ── */
     .metric-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 0;
+      padding: 11px 0;
       border-bottom: 1px solid var(--border);
       font-size: 14px;
+      flex-wrap: wrap;
     }
-
     .metric-row:last-child { border-bottom: none; }
     .metric-label { width: 220px; flex-shrink: 0; color: var(--muted); }
-    .metric-before { width: 120px; color: #dc2626; font-weight: 600; }
-    .metric-after  { width: 120px; color: #16a34a; font-weight: 600; }
-    .metric-delta  { flex: 1; font-size: 12px; font-weight: 700; color: var(--brand); background: #eef1f7; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .metric-before { width: 110px; color: #dc2626; font-weight: 600; }
+    .metric-after  { width: 110px; color: #16a34a; font-weight: 600; }
+    .metric-delta  { font-size: 12px; font-weight: 700; color: var(--brand); background: #eef1f7; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+
+    /* ── FAQ ── */
+    .faq-item { margin-bottom: 22px; }
+    .faq-q { font-size: 15px; font-weight: 600; color: var(--brand); margin-bottom: 6px; }
+    .faq-a { font-size: 15px; color: var(--muted); }
 
     /* ── FOOTER ── */
     footer {
@@ -317,10 +273,8 @@
       color: #aaa;
       border-top: 1px solid var(--border);
     }
-
     footer a { color: var(--brand); text-decoration: none; }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .toc { display: none; }
       .layout { padding: 20px 16px; }
@@ -328,12 +282,13 @@
       .hero h1 { font-size: 24px; }
       .section { padding: 24px 18px; }
       .topnav { padding: 14px 20px; }
+      .metric-label { width: 100%; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOP NAV -->
+<!-- NAV -->
 <nav class="topnav">
   <a href="../index.html">DhvaniAI White Papers</a>
   <span class="sep">›</span>
@@ -343,643 +298,279 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-tag">Non-Destructive Testing · White Paper</div>
-  <h1>Machine Vision in Magnetic Particle Inspection</h1>
+  <h1>AI-Powered Machine Vision for Magnetic Particle Inspection</h1>
   <div class="hero-meta">
     <span>📅 October 2025</span>
     <span>🏢 DhvaniAI Technologies</span>
-    <span>📖 ~20 min read</span>
+    <span>📖 ~10 min read</span>
     <span>📄 v1.0</span>
   </div>
   <p class="hero-summary">
-    How AI-powered automated defect detection revolutionizes MPI workflows through anomaly detection models, real-time edge computing, and seamless factory integration — with a detailed connecting rod inspection case study.
+    A practical guide to how AI-powered machine vision transforms MPI from a manual, operator-dependent process into a fast, objective, and fully traceable quality control system — with a real-world connecting rod case study showing 8× throughput improvement and a 5.4-month payback.
   </p>
 </div>
 
-<!-- MAIN LAYOUT -->
+<!-- LAYOUT -->
 <div class="layout">
 
-  <!-- SIDEBAR TOC -->
+  <!-- TOC -->
   <aside class="toc">
     <div class="toc-title">Contents</div>
     <ol>
-      <li><a href="#exec-summary">Executive Summary</a></li>
-      <li><a href="#s1">1. MPI Automation</a>
-        <ol class="toc-sub">
-          <li><a href="#s1-1">1.1 Manual Limitations</a></li>
-        </ol>
-      </li>
-      <li><a href="#s2">2. Machine Vision Solution</a>
-        <ol class="toc-sub">
-          <li><a href="#s2-1">2.1 System Architecture</a></li>
-          <li><a href="#s2-2">2.2 Advantages</a></li>
-        </ol>
-      </li>
-      <li><a href="#s3">3. PixIQ Platform</a>
-        <ol class="toc-sub">
-          <li><a href="#s3-1">3.1 What is PixIQ?</a></li>
-          <li><a href="#s3-2">3.2 Architecture</a></li>
-          <li><a href="#s3-3">3.3 Software Stack</a></li>
-          <li><a href="#s3-4">3.4 Key Advantages</a></li>
-        </ol>
-      </li>
-      <li><a href="#s4">4. Anomaly Detection</a>
-        <ol class="toc-sub">
-          <li><a href="#s4-1">4.1 Manufacturing Reality</a></li>
-          <li><a href="#s4-2">4.2 Lifecycle</a></li>
-          <li><a href="#s4-3">4.3 Model Selection</a></li>
-          <li><a href="#s4-4">4.4 Why It Works</a></li>
-        </ol>
-      </li>
-      <li><a href="#s5">5. System Integration</a>
-        <ol class="toc-sub">
-          <li><a href="#s5-1">5.1 Connection Diagram</a></li>
-          <li><a href="#s5-2">5.2 Workflow</a></li>
-        </ol>
-      </li>
-      <li><a href="#s6">6. Connecting Rod Use Case</a>
-        <ol class="toc-sub">
-          <li><a href="#s6-1">6.1 Overview</a></li>
-          <li><a href="#s6-2">6.2 Challenges</a></li>
-          <li><a href="#s6-3">6.3 Solution</a></li>
-          <li><a href="#s6-4">6.4 Workflow</a></li>
-          <li><a href="#s6-5">6.5 Results</a></li>
-          <li><a href="#s6-6">6.6 Continuous Improvement</a></li>
-        </ol>
-      </li>
-      <li><a href="#s7">7. Conclusion</a></li>
+      <li><a href="#s1">1. What is Machine Vision MPI?</a></li>
+      <li><a href="#s2">2. Why Use AI?</a></li>
+      <li><a href="#s3">3. How the AI Works</a></li>
+      <li><a href="#s4">4. Key Advantages</a></li>
+      <li><a href="#s5">5. Project Lifecycle</a></li>
+      <li><a href="#s6">6. Use Case: Connecting Rod</a></li>
+      <li><a href="#s7">7. FAQ</a></li>
     </ol>
   </aside>
 
   <!-- CONTENT -->
   <main class="content">
 
-    <!-- EXECUTIVE SUMMARY -->
-    <section class="section" id="exec-summary">
-      <div class="section-num">Executive Summary</div>
-      <h2>Overview</h2>
+    <!-- S1 -->
+    <section class="section" id="s1">
+      <div class="section-num">Section 1</div>
+      <h2>What is Machine Vision-Based MPI?</h2>
+
+      <h3>From Human Eye to Digital Eye</h3>
       <p>
-        Magnetic Particle Inspection (MPI) is a critical non-destructive testing method used extensively in manufacturing to detect surface and near-surface defects in ferromagnetic materials. Traditional MPI relies heavily on manual visual inspection by trained operators, leading to challenges in consistency, scalability, and throughput.
+        Magnetic Particle Inspection (MPI) is a trusted method for finding invisible cracks in materials. Traditionally, this process relies on a trained human inspector examining a part under a blacklight, looking for the tell-tale fluorescent glow of iron particles that have gathered along a defect.
       </p>
       <p>
-        This white paper explores how advanced machine vision technology — specifically the <strong>PixIQ platform</strong> — revolutionizes MPI workflows through AI-powered automated defect detection, real-time decision making, and seamless factory integration. We demonstrate the application of anomaly detection models optimized for manufacturing environments and present a detailed use case of connecting rod inspection.
+        <strong>Machine Vision-Based MPI</strong> elevates this process by replacing the human eye with a high-resolution industrial camera and specialized UV lighting. The system automatically captures a perfect, repeatable image of the part — turning a physical inspection into digital data that can be analyzed by a computer. This simple change lays the foundation for a much smarter and more reliable quality control process.
       </p>
+
+      <div class="callout callout-blue">
+        <strong>In short:</strong> The same physics-based MPI process your team already trusts — now with a consistent, tireless digital eye and an AI brain that never has a bad day.
+      </div>
+    </section>
+
+    <!-- S2 -->
+    <section class="section" id="s2">
+      <div class="section-num">Section 2</div>
+      <h2>Why Use Artificial Intelligence?</h2>
+
+      <h3>Overcoming the Limits of Human Inspection</h3>
+      <p>While human inspectors are skilled, the process is naturally subjective and affected by unavoidable human factors:</p>
+
+      <ul>
+        <li><strong>Fatigue:</strong> Inspecting thousands of parts is demanding and leads to missed defects — especially late in a shift.</li>
+        <li><strong>Inconsistency:</strong> What one inspector flags, another might not. This variability changes from shift to shift and person to person.</li>
+        <li><strong>No Digital Record:</strong> Manual inspection doesn't create a data trail. It's difficult to track trends, prove quality to a customer, or analyze why defects are occurring.</li>
+      </ul>
+
+      <p>
+        <strong>Artificial Intelligence</strong> solves these problems. By pairing the machine vision camera with a powerful AI, the system learns to identify defects with superhuman consistency and speed. The AI doesn't get tired or have a bad day. Every part is inspected using the exact same criteria, every single time — creating a reliable, objective, and fully auditable record of quality.
+      </p>
+    </section>
+
+    <!-- S3 -->
+    <section class="section" id="s3">
+      <div class="section-num">Section 3</div>
+      <h2>How the AI Works</h2>
+
+      <p>
+        The AI isn't programmed with a fixed list of rules like "if it's long and thin, it's a crack." Instead, it <strong>learns</strong> what defects look like from examples — much like a human does, but with a perfect memory and pixel-level precision.
+      </p>
+
+      <p>
+        We don't need years of defect data to get started. The PIXIQ system is designed to become an expert on your production line through a practical, phased approach:
+      </p>
+
+      <div class="phase-list">
+
+        <div class="phase-card">
+          <div class="phase-badge">1</div>
+          <div class="phase-body">
+            <strong>Unsupervised Learning — Learning What "Good" Looks Like</strong>
+            <div class="phase-meta">Starts from day one · No defect data required</div>
+            <p>We show the AI hundreds of images of your <em>good</em> parts. It builds a "digital fingerprint" of what a flawless part looks like. From this point on it operates as an anomaly detector — any image that deviates from this fingerprint is flagged for a human expert to review. The system delivers value immediately, before it has ever seen a real defect.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-badge">2</div>
+          <div class="phase-body">
+            <strong>Semi-Supervised Learning — Learning the Difference</strong>
+            <div class="phase-meta">Weeks 2–6 · Builds on operator feedback</div>
+            <p>As the system flags anomalies, a human operator provides feedback: "Yes, that's a crack," or "No, that's just a piece of dust." This feedback builds a small, high-quality dataset of confirmed good and bad examples. The AI begins to learn the specific visual characteristics that separate a true flaw from a harmless variation.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-badge">3</div>
+          <div class="phase-body">
+            <strong>Supervised Learning — Full AI Expertise</strong>
+            <div class="phase-meta">Current deployed capability · ~150 defect samples needed</div>
+            <p>Once a sufficient number of confirmed defective parts are collected (typically around 150 examples), we fully train the AI on labeled examples. It studies the entire library with pixel-level precision, learning the subtle differences in texture, brightness, and shape that define different defect types. The AI doesn't just say "Fail" — it <strong>highlights the exact location of the defect on the image</strong>, so the operator sees precisely what was found.</p>
+          </div>
+        </div>
+
+        <div class="phase-card">
+          <div class="phase-badge">∞</div>
+          <div class="phase-body">
+            <strong>Continuous Improvement — Operator Feedback Loop</strong>
+            <div class="phase-meta">Ongoing · Gets smarter with every production run</div>
+            <p>Operators can flag AI mistakes directly from the interface. Corrections are saved and sent back to the engineering team. New data is incorporated into the next training cycle — so the AI grows more accurate with real-world production data over time.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- S4 -->
+    <section class="section" id="s4">
+      <div class="section-num">Section 4</div>
+      <h2>Key Advantages</h2>
+
+      <p>Integrating AI into your MPI process with the PIXIQ system delivers clear, measurable benefits:</p>
+
+      <ul>
+        <li><strong>100% Objectivity:</strong> Eliminates the guesswork and subjectivity of human inspection. Every decision is data-driven.</li>
+        <li><strong>Unmatched Consistency:</strong> The AI inspects every part with the same level of focus and precision, 24/7 — no shift changes, no fatigue.</li>
+        <li><strong>Speed:</strong> Inspection takes less than a second, easily keeping pace with even the fastest production lines.</li>
+        <li><strong>Traceability &amp; Data:</strong> Every inspection creates a digital record — photographic proof of the quality of every part shipped, plus a dataset to help analyze and improve your manufacturing processes.</li>
+        <li><strong>Defect Localization:</strong> The AI highlights the exact location of a defect on the image, not just a pass/fail verdict — giving operators immediate visual confirmation of every finding.</li>
+        <li><strong>Configurable Sensitivity:</strong> The system can be tuned to balance aggressiveness (flagging everything suspicious) against throughput, based on your specific quality requirements.</li>
+        <li><strong>Non-Invasive:</strong> Works with your existing MPI equipment as a simple add-on, minimizing disruption to your current workflow.</li>
+      </ul>
 
       <div class="stat-grid">
         <div class="stat-card">
-          <span class="stat-value">98%</span>
-          <div class="stat-label">Cycle time reduction</div>
+          <span class="stat-value">&lt;100ms</span>
+          <div class="stat-label">Trigger to PLC response</div>
         </div>
         <div class="stat-card">
-          <span class="stat-value">8×</span>
-          <div class="stat-label">Throughput increase</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-value">99.2%</span>
+          <span class="stat-value">&gt;99%</span>
           <div class="stat-label">Defect detection rate</div>
         </div>
         <div class="stat-card">
-          <span class="stat-value">5.4mo</span>
-          <div class="stat-label">Payback period</div>
+          <span class="stat-value">24/7</span>
+          <div class="stat-label">Consistent operation</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">100%</span>
+          <div class="stat-label">Digital traceability</div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 1 -->
-    <section class="section" id="s1">
-      <div class="section-num">Section 1</div>
-      <h2>MPI Automation: Addressing Industry Challenges</h2>
-
-      <p>
-        Magnetic Particle Inspection remains the gold standard for detecting surface and near-surface defects in ferromagnetic components across aerospace, automotive, power generation, and heavy manufacturing. While MPI's physics-based approach is proven and reliable, the inspection process faces mounting pressures in modern manufacturing environments.
-      </p>
-
-      <h3 id="s1-1">1.1 Manual Inspection Limitations</h3>
-
-      <h4>Operator Dependency and Consistency</h4>
-      <ul>
-        <li>Subjective interpretation of indications varies between inspectors</li>
-        <li>Performance degradation due to fatigue over extended shifts</li>
-        <li>Extensive training and certification requirements (ASNT SNT-TC-1A, ISO 9712)</li>
-        <li>Inter-operator variability affects reproducibility</li>
-      </ul>
-
-      <h4>Throughput Constraints</h4>
-      <ul>
-        <li>Inspection cycle time: <strong>2–5 minutes per part</strong> (medium complexity)</li>
-        <li>Manual process creates production bottlenecks</li>
-        <li>Incompatible with high-speed continuous flow manufacturing</li>
-        <li>Limited scalability for volume production</li>
-      </ul>
-
-      <h4>Quality and Traceability Gaps</h4>
-      <ul>
-        <li>False negative rate: <strong>5–15%</strong> (missed defects due to operator factors)</li>
-        <li>False positive rate: <strong>10–20%</strong> (unnecessary rejections, increased scrap costs)</li>
-        <li>Manual documentation prone to errors</li>
-        <li>Difficult to aggregate quality data for statistical process control</li>
-      </ul>
-
-      <h4>Workforce Challenges</h4>
-      <ul>
-        <li>Skilled MPI inspectors increasingly difficult to recruit and retain</li>
-        <li>High labor costs in developed manufacturing markets</li>
-        <li>24/7 shift coverage requires multiple certified personnel</li>
-        <li>Ergonomic concerns: UV exposure, repetitive handling, darkened environments</li>
-      </ul>
-    </section>
-
-    <!-- SECTION 2 -->
-    <section class="section" id="s2">
-      <div class="section-num">Section 2</div>
-      <h2>Machine Vision Solution for MPI</h2>
-
-      <h3 id="s2-1">2.1 Machine Vision System Architecture</h3>
-      <p>Modern machine vision systems for MPI integrate multiple technologies to replicate and enhance human inspection capabilities:</p>
-
-      <h4>High-Resolution Industrial Cameras</h4>
-      <ul>
-        <li>Industrial-grade sensors optimized for fluorescent particle detection</li>
-        <li>High-resolution imaging (2+ megapixels) to capture fine crack details</li>
-        <li>High frame rates (20–60 fps) for moving inspection lines</li>
-        <li>Global shutter technology to eliminate motion blur</li>
-        <li>GigE or USB3 interface for high-speed data transfer</li>
-        <li>Optical filters (e.g., yellow-green) to enhance defect contrast</li>
-      </ul>
-
-      <h4>Specialized Illumination</h4>
-      <ul>
-        <li>UV-A LED arrays (365nm peak wavelength) for fluorescent particle excitation</li>
-        <li>Uniform intensity distribution across field of view (&gt;1000 µW/cm² minimum)</li>
-        <li>Synchronized strobing for motion freeze in high-speed applications</li>
-        <li>Visible light supplementation for part localization and orientation</li>
-      </ul>
-
-      <h4>Machine Vision Computer / Controller</h4>
-      <ul>
-        <li>GPU-accelerated image processing for real-time analysis</li>
-        <li>Deep learning inference engines for defect classification</li>
-        <li>Edge computing capability for factory floor deployment</li>
-        <li>Industrial-grade hardware for harsh manufacturing environments</li>
-      </ul>
-
-      <h4>Factory Integration Interfaces</h4>
-      <ul>
-        <li>PLC communication (Modbus TCP/IP, OPC-UA, EtherNet/IP)</li>
-        <li>Proximity sensors and triggers for part presence detection</li>
-        <li>Rejection mechanisms (pneumatic gates, diverters, marking systems)</li>
-        <li>HMI displays for operator oversight and manual verification stations</li>
-      </ul>
-
-      <h3 id="s2-2">2.2 Advantages of Machine Vision for MPI</h3>
-
-      <div class="callout callout-green">
-        <strong>Key result:</strong> Machine vision reduces inspection cycle time from 2–5 minutes to 0.5–3 seconds — a 5–10× throughput improvement — while improving detection accuracy and eliminating operator fatigue.
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Dimension</th>
-              <th>Manual Inspection</th>
-              <th>Machine Vision</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Cycle Time</strong></td><td>2–5 min / part</td><td>0.5–3 sec / part</td></tr>
-            <tr><td><strong>False Negative Rate</strong></td><td>5–15%</td><td>&lt;2%</td></tr>
-            <tr><td><strong>False Positive Rate</strong></td><td>10–20%</td><td>&lt;3%</td></tr>
-            <tr><td><strong>Shift Coverage</strong></td><td>Multiple certified FTEs</td><td>0.5 FTE supervision</td></tr>
-            <tr><td><strong>Traceability</strong></td><td>Manual records</td><td>100% digital audit trail</td></tr>
-            <tr><td><strong>UV Exposure</strong></td><td>Operators exposed</td><td>Zero operator exposure</td></tr>
-            <tr><td><strong>Consistency</strong></td><td>Varies by operator/fatigue</td><td>Identical criteria, every part</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 3 -->
-    <section class="section" id="s3">
-      <div class="section-num">Section 3</div>
-      <h2>PixIQ: AI-Powered Industrial Vision Controller</h2>
-
-      <h3 id="s3-1">3.1 What is PixIQ?</h3>
-      <p>
-        PixIQ is an <strong>AI-powered industrial vision controller platform</strong> developed by DhvaniAI Technologies, designed to dramatically reduce the deployment time of vision inspection systems on factory floors. PixIQ transforms traditional vision system deployment from lengthy development cycles (often 6–12 months) into a rapid, plug-and-play solution deployable in <strong>days to weeks</strong>.
-      </p>
-      <p>PixIQ serves as a complete edge computing solution for factory automation, seamlessly integrating:</p>
-      <ul>
-        <li><strong>Deep Learning AI</strong> — intelligent defect detection and classification</li>
-        <li><strong>Docker Containerization</strong> — reliable deployment and updates</li>
-        <li><strong>Edge IoT Processing</strong> — low-latency real-time inspection</li>
-        <li><strong>Cloud-Based Management</strong> — multi-device orchestration and model deployment</li>
-      </ul>
-
-      <h3 id="s3-2">3.2 System Architecture</h3>
-      <p>PixIQ employs a <strong>resource-optimized dual-system architecture</strong> that maximizes AI processing performance while providing rich operator interfaces:</p>
-
-      <h4>AI Vision Controller (e.g., Asus PE1100N Orion, NVIDIA Jetson)</h4>
-      <ul>
-        <li>Dedicated to vision processing and AI inference</li>
-        <li>GPU-accelerated processing for deep learning models</li>
-        <li>Optimized memory architecture for real-time performance</li>
-        <li>Real-time inference: <strong>&lt;100ms end-to-end latency</strong></li>
-        <li>No UI rendering or database overhead for maximum throughput</li>
-      </ul>
-
-      <h4>All-in-One Desktop System (e.g., Asus AIO A3202)</h4>
-      <ul>
-        <li>Dedicated HMI and operator interface</li>
-        <li>Real-time inspection streaming with overlay annotations</li>
-        <li>Database operations and production reporting</li>
-        <li>Statistical dashboards and quality analytics</li>
-        <li>Complete isolation from controller maximizes AI processing resources</li>
-      </ul>
-
-      <h4>Industrial-Grade Enclosure</h4>
-      <ul>
-        <li>Fanless operation with advanced thermal management</li>
-        <li>IP65 protection for harsh factory environments</li>
-        <li>Compact form factor for space-constrained installations</li>
-        <li>Shock and vibration resistance</li>
-      </ul>
-
-      <h3 id="s3-3">3.3 Software Stack</h3>
-
-      <div class="diagram-wrap">
-        <div class="mermaid">
-graph TB
-    subgraph PixIQ["PixIQ PLATFORM"]
-        subgraph Controller["VISION CONTROLLER (Asus PE1100N / Jetson)"]
-            subgraph Layer1["LAYER 1: Hardware Abstraction"]
-                Camera["Camera Interface<br/>CUDA Accelerated"]
-                Sensor["Sensor Interface<br/>Modbus/OPC-UA"]
-                Trigger["Hardware Triggering"]
-            end
-            subgraph Layer2["LAYER 2: Core Processing"]
-                Ingestion["Data Ingestion<br/>Pre-processing"]
-                AIEngine["AI Inference Engine<br/>TensorRT &lt;40ms"]
-                Results["Results Manager<br/>Decision Logic"]
-            end
-            subgraph Layer3A["LAYER 3A: Real-time Communication"]
-                MQTT["MQTT Broker"]
-                PLCComm["PLC Communication"]
-            end
-            subgraph Layer5A["LAYER 5A: Controller Management"]
-                DockerCtrl["Docker Containers"]
-                IoTEdgeCtrl["Azure IoT Edge<br/>Orchestration"]
-            end
-        end
-        subgraph HMI["HMI WORKSTATION (Asus AIO A3202)"]
-            subgraph Layer3B["LAYER 3B: Data Management"]
-                SQLite["SQLite Database<br/>Edge Storage"]
-                Azure["Azure IoT Hub<br/>Cloud Sync"]
-            end
-            subgraph Layer4["LAYER 4: Application & UI"]
-                Backend["Backend API<br/>Flask/FastAPI"]
-                Frontend["React Frontend<br/>Real-time Display"]
-                Gateway["MES/ERP Gateway"]
-            end
-            subgraph Layer5B["LAYER 5B: HMI Management"]
-                DockerHMI["Docker Containers"]
-                IoTEdgeHMI["Azure IoT Edge<br/>Orchestration"]
-                OTA["OTA Updates"]
-            end
-        end
-        Layer1 --> Layer2
-        Layer2 --> Layer3A
-        Layer3A <--> Layer3B
-        Layer3B --> Layer4
-        Layer5A <-.->|Coordinated Management| Layer5B
-    end
-    HW["Hardware — Cameras, Sensors, PLCs"] --> Layer1
-    Layer5B --> Cloud["Cloud Platform<br/>Management & Analytics"]
-        </div>
-      </div>
-
-      <h4>VISION CONTROLLER — Component Detail</h4>
-      <ul>
-        <li><strong>Layer 1 (Hardware Abstraction):</strong> Multi-modal camera interface with CUDA acceleration; support for Basler, The Imaging Source, FLIR, IDS cameras; Modbus TCP/IP &amp; OPC-UA sensor integration; hardware triggering &amp; synchronization</li>
-        <li><strong>Layer 2 (Core Processing):</strong> Data ingestion with pre-processing &amp; normalization; TensorRT-optimized AI inference engine; results manager with business logic and decision rules; real-time performance: &lt;40ms inference time</li>
-        <li><strong>Layer 3A (Real-time Communication):</strong> Mosquitto MQTT broker for inter-service messaging; real-time PLC communication for PASS/FAIL signals</li>
-        <li><strong>Layer 5A (Controller Management):</strong> Docker containerization; Azure IoT Edge orchestration</li>
-      </ul>
-
-      <h4>HMI WORKSTATION — Component Detail</h4>
-      <ul>
-        <li><strong>Layer 3B (Data Management):</strong> SQLite database for edge storage and traceability; Azure IoT Hub integration for cloud connectivity</li>
-        <li><strong>Layer 4 (Application &amp; UI):</strong> Flask/FastAPI REST API backend; React-based HMI with real-time visualization; MES/ERP API gateway; multi-role access control</li>
-        <li><strong>Layer 5B (HMI Management):</strong> Docker containerization; Azure IoT Edge orchestration; OTA model and software updates; device health monitoring</li>
-      </ul>
-
-      <div class="callout callout-blue">
-        <strong>Note:</strong> Both Vision Controller and HMI run Azure IoT Edge for distributed container management and coordinated updates across the PixIQ platform.
-      </div>
-
-      <h3 id="s3-4">3.4 Key Advantages of PixIQ</h3>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Capability</th><th>Specification</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Deployment Time</strong></td><td>Days to weeks (vs. 6–12 months traditional)</td></tr>
-            <tr><td><strong>End-to-End Latency</strong></td><td>&lt;100ms trigger to PLC response</td></tr>
-            <tr><td><strong>Camera Synchronization</strong></td><td>&lt;1ms accuracy, hardware-triggered</td></tr>
-            <tr><td><strong>AI Inference</strong></td><td>TensorRT + INT8 quantization, &lt;40ms</td></tr>
-            <tr><td><strong>Camera Scalability</strong></td><td>Up to 20+ cameras per controller</td></tr>
-            <tr><td><strong>Protocols</strong></td><td>Modbus TCP/IP, OPC-UA, EtherNet/IP</td></tr>
-            <tr><td><strong>AI Models</strong></td><td>U-Net, YOLO, ResNet, Anomaly Detection</td></tr>
-            <tr><td><strong>Typical ROI</strong></td><td>12–18 months payback</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 4 -->
-    <section class="section" id="s4">
-      <div class="section-num">Section 4</div>
-      <h2>Anomaly Detection: Optimized for Manufacturing Excellence</h2>
-
-      <h3 id="s4-1">4.1 The Manufacturing Reality: Learning from Good Parts</h3>
-
-      <p>In high-quality manufacturing, <strong>defects are rare</strong> (0.1–5% of production). Traditional AI approaches require thousands of labeled defect examples — practically impossible when you're producing good parts 95–99% of the time.</p>
-
-      <div class="callout callout-green">
-        <strong>PixIQ's anomaly detection takes a fundamentally different approach:</strong> Instead of teaching the system what defects look like, we teach it what <strong>normal / good parts look like</strong>. Anything that deviates from normal is automatically flagged for review.<br/><br/>
-        <strong>Key Advantage:</strong> You can deploy inspection systems with only <strong>200–500 images of good parts</strong> — no defect examples needed upfront.
-      </div>
-
-      <h3 id="s4-2">4.2 Anomaly Detection Lifecycle</h3>
-
-      <div class="diagram-wrap">
-        <div class="mermaid">
-flowchart TD
-    Start([New Production Line]) --> Collect[Collect 200-500 Images<br/>of Known-Good Parts]
-    Collect --> Upload[Upload to Cloud Platform<br/>for Training]
-    Upload --> Train[Automated Model Training<br/>2-4 hours on Cloud GPU]
-    Train --> Deploy[One-Click Deployment<br/>to PixIQ Controller]
-    Deploy --> Inspect[Production Inspection<br/>Real-time Anomaly Scoring]
-    Inspect --> Decision{Anomaly Score}
-    Decision -->|Normal Range| Pass[PASS — Part Continues]
-    Decision -->|Borderline| Verify[VERIFY — Manual Review]
-    Decision -->|High Deviation| Fail[FAIL — Auto Reject]
-    Verify --> Feedback{Operator Confirms}
-    Feedback -->|True Defect| DefectDB[(Add to Defect Database)]
-    Feedback -->|False Alarm| Adjust[Adjust Threshold]
-    DefectDB --> Refine[Continuous Model Refinement]
-    Adjust --> Refine
-    Refine --> Inspect
-    Pass --> Monitor[Monitor Anomaly Score Trends]
-    Monitor --> Drift{Process Drift?}
-    Drift -->|Yes| Alert[Early Warning Alert<br/>Preventive Maintenance]
-    Drift -->|No| Inspect
-    Alert --> Inspect
-        </div>
-      </div>
-
-      <h3 id="s4-3">4.3 Model Selection: Matching Complexity to Your Needs</h3>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Model Tier</th><th>Best For</th><th>Setup Time</th><th>Data Needed</th><th>Inference</th><th>Accuracy</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Standard</strong></td>
-              <td>Simple geometries, consistent lighting, single defect types</td>
-              <td>1–2 days</td>
-              <td>200–300 good parts</td>
-              <td>15ms</td>
-              <td>95–97%</td>
-            </tr>
-            <tr>
-              <td><strong>Advanced</strong></td>
-              <td>Complex surfaces, varying conditions, multiple defect types</td>
-              <td>3–5 days</td>
-              <td>400–600 good parts</td>
-              <td>25ms</td>
-              <td>97–99%</td>
-            </tr>
-            <tr>
-              <td><strong>Premium</strong></td>
-              <td>Intricate geometries, subtle defects, zero-escape tolerance</td>
-              <td>5–7 days</td>
-              <td>500–1,000 good parts</td>
-              <td>35ms</td>
-              <td>&gt;99%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p><strong>All three models share the same deployment advantage:</strong> Train on good parts only, detect unknown defects automatically.</p>
-
-      <h3 id="s4-4">4.4 Why This Approach Works for MPI</h3>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Metric</th><th>Result</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Detection Rate (critical defects)</td><td><strong>&gt;98%</strong> for cracks, laps, seams</td></tr>
-            <tr><td>False Positive Rate</td><td><strong>&lt;3%</strong> after 100–200 production samples</td></tr>
-            <tr><td>Inspection Speed</td><td><strong>15–35ms</strong> per image</td></tr>
-            <tr><td>Novel Defect Detection</td><td><strong>85–90%</strong> catch rate without retraining</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 5 -->
+    <!-- S5 -->
     <section class="section" id="s5">
       <div class="section-num">Section 5</div>
-      <h2>MPI Inspection System with PixIQ: System Integration</h2>
+      <h2>Project Lifecycle: What to Expect</h2>
 
-      <h3 id="s5-1">5.1 System Connection Diagram</h3>
+      <p>From first conversation to live deployment, a typical PIXIQ MPI project follows a clear, structured path. Each phase has defined milestones and data requirements so you always know where you stand.</p>
 
-      <div class="diagram-wrap">
-        <div class="mermaid">
-graph LR
-    subgraph Factory["FACTORY AUTOMATION"]
-        PLC["Factory PLC<br/>Allen-Bradley / Siemens / Omron"]
-        Sensor["Proximity Sensor"]
-        Mag["Magnetization Station"]
-        Reject["Rejection Mechanism<br/>(Pneumatic Gate)"]
-    end
-    subgraph Inspection["MPI INSPECTION STATION"]
-        Camera["Industrial Camera<br/>Basler acA1920-40gc<br/>2MP GigE + 16mm Lens"]
-        LED["Inspection Lighting<br/>Synchronized"]
-    end
-    subgraph PixIQ["PixIQ CONTROLLER"]
-        Controller["PixIQ Vision Controller<br/>Asus PE1100N Orion 8GB<br/>AI Inspection Engine"]
-    end
-    subgraph Operator["OPERATOR STATION"]
-        HMI["HMI All-in-One PC<br/>Asus AIO A3202<br/>Ubuntu 22.04"]
-    end
-    Switch["8-Port GigE Switch"]
-    Sensor -->|24VDC Trigger Digital I/O| Controller
-    PLC <-->|Modbus TCP / OPC-UA| Controller
-    Controller -->|Digital Output 24VDC| Reject
-    Controller -->|Trigger Signal| LED
-    Camera -->|GigE Cat6 5m| Switch
-    Switch -->|Ethernet| Controller
-    Controller <-->|TCP/IP| HMI
-    Controller -.->|WiFi/4G| Cloud["Cloud Platform<br/>Model Updates & Analytics"]
-        </div>
-      </div>
-
-      <h4>System Bill of Materials</h4>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Component</th><th>Specification</th><th>Qty</th><th>Notes</th></tr>
+            <tr>
+              <th>Phase</th>
+              <th>Name</th>
+              <th>Duration</th>
+              <th>Defect Samples Needed</th>
+              <th>What Happens</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td>Industrial Camera</td><td>Basler acA1920-40gc (2MP GigE)</td><td>1–4</td><td>Scalable to inspection requirements</td></tr>
-            <tr><td>Lens</td><td>16mm Fixed Focal Length</td><td>1 per camera</td><td>Optimized for working distance</td></tr>
-            <tr><td>Optical Filter</td><td>Hoya X0 Yellow-Green + Holder</td><td>1 per camera</td><td>Enhances defect contrast</td></tr>
-            <tr><td>GigE Cable</td><td>Cat6, 5m</td><td>1 per camera</td><td>Camera data transmission</td></tr>
-            <tr><td>PixIQ Controller</td><td>Asus PE1100N — Orion 8GB</td><td>1</td><td>AI-powered inspection engine</td></tr>
-            <tr><td>HMI Workstation</td><td>Asus AIO A3202, Ubuntu 22.04</td><td>1</td><td>Operator interface</td></tr>
-            <tr><td>Network Switch</td><td>8-Port Managed GigE</td><td>1</td><td>Camera network</td></tr>
-            <tr><td>WiFi/4G Module</td><td>WiFi Dongle + SIM Card</td><td>1</td><td>Cloud connectivity (optional)</td></tr>
+            <tr>
+              <td><strong>0</strong></td>
+              <td>Discovery &amp; Setup</td>
+              <td>1–2 weeks</td>
+              <td>0</td>
+              <td>Camera and lighting installation, PLC integration, image capture validation. We confirm the system can consistently capture inspection-quality images of your parts.</td>
+            </tr>
+            <tr>
+              <td><strong>1</strong></td>
+              <td>Anomaly Baseline</td>
+              <td>1–2 weeks</td>
+              <td>0</td>
+              <td>The AI is shown 200–400 images of good parts only. It learns what a flawless part looks like and begins flagging anything unusual. The system is live — all anomalies go to a human reviewer.</td>
+            </tr>
+            <tr>
+              <td><strong>2</strong></td>
+              <td>Data Collection &amp; Labeling</td>
+              <td>2–4 weeks</td>
+              <td>50–100</td>
+              <td>Flagged anomalies are reviewed and labeled by your team or ours. This builds the first dataset of confirmed defects. Human review continues throughout.</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td>First Supervised Model</td>
+              <td>1–2 weeks</td>
+              <td>100–150</td>
+              <td>Once ~150 confirmed defective images are labeled, the first supervised model is trained, validated, and deployed in assisted mode — AI gives a verdict, human confirms every decision.</td>
+            </tr>
+            <tr>
+              <td><strong>4</strong></td>
+              <td>Pilot Validation</td>
+              <td>2–4 weeks</td>
+              <td>150+</td>
+              <td>The model runs in parallel with human inspection on live production. Pass/Fail agreement is measured. Threshold tuning is performed to meet your quality criteria.</td>
+            </tr>
+            <tr>
+              <td><strong>5</strong></td>
+              <td>Full Deployment</td>
+              <td>Ongoing</td>
+              <td>Accumulating</td>
+              <td>The validated model runs autonomously. Human review is reserved for flagged edge cases. Model is retrained periodically as new labeled data accumulates.</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <h3 id="s5-2">5.2 Inspection Workflow</h3>
-
-      <div class="diagram-wrap">
-        <div class="mermaid">
-flowchart TB
-    Start([Part Enters MPI Station]) --> Mag[MAGNETIZATION<br/>Electromagnetic Coil — 5 seconds]
-    Mag --> Spray[Apply Magnetic Particles<br/>Fluorescent Suspension — Drain Excess]
-    Spray --> Sense[Proximity Sensor Detects Part]
-    Sense --> Trigger[TRIGGER SIGNAL to PixIQ — 0-10ms]
-    Trigger --> Capture[CAMERA CAPTURE<br/>Multi-angle Images — 5-15ms]
-    Capture --> Preprocess[PREPROCESSING<br/>Contrast Enhancement + Noise Reduction — 2-5ms]
-    Preprocess --> AI[AI INFERENCE<br/>Anomaly Detection — 15-30ms]
-    AI --> Decision{DECISION LOGIC}
-    Decision -->|Normal| Pass[PASS]
-    Decision -->|Borderline| Verify[VERIFY — Manual Review]
-    Decision -->|Defect| Fail[FAIL]
-    Pass --> Continue[Part Continues to Next Station]
-    Fail --> RejectBin[Pneumatic Gate — Reject Bin]
-    Decision -.->|Parallel| DataLog[Data Logging — SQLite]
-    DataLog --> HMIUpdate[HMI Real-time Update]
-    HMIUpdate --> CloudSync[Cloud Sync — Azure IoT Hub]
-        </div>
-      </div>
-
-      <h4>Cycle Time Breakdown</h4>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Phase</th><th>Process</th><th>Time</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Phase 1</td><td>Magnetization &amp; Particle Application</td><td>5 seconds</td></tr>
-            <tr><td>Phase 2</td><td>Trigger &amp; Image Acquisition</td><td>15–35ms</td></tr>
-            <tr><td>Phase 3</td><td>AI Processing &amp; Analysis</td><td>18–38ms</td></tr>
-            <tr><td>Phase 4</td><td>Decision &amp; PLC Communication</td><td>5–15ms</td></tr>
-            <tr><td><strong>Critical Path</strong></td><td><strong>Sensor to PLC Response</strong></td><td><strong>50–100ms ⚡</strong></td></tr>
-            <tr><td>Parallel</td><td>Data Logging &amp; HMI Update</td><td>Async</td></tr>
-            <tr><td><strong>Total</strong></td><td><strong>Complete Inspection Cycle</strong></td><td><strong>1–3 seconds</strong></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="callout callout-blue">
-        <strong>Throughput:</strong> High-speed mode: 40–60 parts/min · Standard mode: 20–40 parts/min · Premium mode: 15–25 parts/min
-      </div>
+      <h3>What the Numbers Mean in Practice</h3>
+      <ul>
+        <li><strong>Phase 1 can begin immediately</strong> — you do not need any defect data to start getting value from the system.</li>
+        <li><strong>150 defective images</strong> is the minimum for a deployable supervised model. More data means better accuracy — 400+ examples is meaningfully more reliable.</li>
+        <li><strong>Total timeline from installation to autonomous deployment: 8–14 weeks</strong>, depending on how quickly defective parts are collected on your production line.</li>
+        <li><strong>Data collection is the critical path.</strong> In high-volume lines where defects are common, Phases 2–3 can close in days. In low-defect environments it may take longer — but Phase 1 keeps the system useful throughout.</li>
+      </ul>
     </section>
 
-    <!-- SECTION 6 -->
+    <!-- S6 -->
     <section class="section" id="s6">
       <div class="section-num">Section 6</div>
-      <h2>Use Case: Connecting Rod Inspection with PixIQ</h2>
+      <h2>Use Case: Connecting Rod Inspection</h2>
 
-      <h3 id="s6-1">6.1 Application Overview</h3>
       <p>
-        Connecting rods are critical engine components subject to extreme cyclic loads and stresses. Manufacturing defects — particularly surface cracks, laps, and seams — can lead to catastrophic engine failure. MPI is mandated for 100% inspection in automotive and aerospace applications.
+        Connecting rods are critical engine components subject to extreme cyclic loads. Manufacturing defects — particularly surface cracks, laps, and seams — can lead to catastrophic engine failure. MPI is mandated for 100% inspection in automotive and aerospace applications.
       </p>
 
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Parameter</th><th>Detail</th></tr></thead>
-          <tbody>
-            <tr><td>Material</td><td>Forged steel — SAE 4340 or similar high-strength alloy</td></tr>
-            <tr><td>Critical Areas</td><td>Fillet radii at cap interface, beam section, pin end bores</td></tr>
-            <tr><td>Defect Types</td><td>Forging laps, quench cracks, grinding cracks, material inclusions</td></tr>
-            <tr><td>Production Volume</td><td>500–2,000 parts per shift</td></tr>
-            <tr><td>Quality Requirement</td><td>0 DPMO for critical cracks</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 id="s6-2">6.2 Traditional Inspection Challenges</h3>
+      <h3>The Challenge</h3>
       <ul>
-        <li>Complex geometry requires inspection from <strong>4–6 orientations</strong></li>
-        <li>Inspection time: <strong>3–5 minutes per part</strong></li>
-        <li>Throughput bottleneck: ~150 parts/shift/inspector</li>
-        <li>False negative risk: <strong>5–10% miss rate</strong> due to operator fatigue</li>
+        <li>Complex geometry requiring inspection from <strong>4–6 orientations</strong></li>
+        <li>Inspection time of <strong>3–5 minutes per part</strong> creating a production bottleneck</li>
+        <li>Manual throughput limited to <strong>~150 parts per shift</strong> per inspector</li>
+        <li>False negative risk of <strong>5–10%</strong> due to operator fatigue</li>
         <li><strong>4 certified inspectors</strong> required for 24/7 coverage</li>
-        <li>Fine cracks (&lt;0.5mm width) difficult to detect in complex geometry</li>
+        <li>Fine cracks under 0.5mm width difficult to detect consistently</li>
       </ul>
 
-      <h3 id="s6-3">6.3 PixIQ Automated Solution</h3>
+      <h3>The PIXIQ Solution</h3>
+      <p>
+        Four industrial cameras capture simultaneous multi-angle images of each connecting rod. The PIXIQ AI runs anomaly detection and defect segmentation in parallel, returning a PASS, FAIL, or VERIFY result — with the defect highlighted on screen — in under 100ms. FAIL parts are automatically diverted by a pneumatic gate before reaching the next station.
+      </p>
+      <p>
+        The system was trained on <strong>500 known-good connecting rods</strong>. No defect examples were needed to go live. Defect-confirmed data collected during the pilot phase was used to refine the model over the following months.
+      </p>
 
-      <h4>Hardware Setup</h4>
-      <ul>
-        <li><strong>Cameras:</strong> 1–4× Basler acA1920-40gc (2MP GigE) — multi-angle (cap end, pin end, side views)</li>
-        <li><strong>Lens:</strong> 16mm fixed focal length per camera</li>
-        <li><strong>Filter:</strong> Hoya X0 Yellow-Green for enhanced defect contrast</li>
-        <li><strong>Triggering:</strong> Rotary indexing table with position encoder</li>
-        <li><strong>Magnetization:</strong> Automated electromagnetic coil with AC magnetization</li>
-        <li><strong>Part Handling:</strong> Robotic gripper with 6-axis articulation</li>
-        <li><strong>Controller:</strong> Asus PE1100N — Orion 8GB</li>
-      </ul>
+      <h3>Results After 6 Months</h3>
 
-      <h4>Software Configuration</h4>
-      <ul>
-        <li><strong>AI Model:</strong> Anomaly detection (autoencoder) + U-Net segmentation</li>
-        <li><strong>Training Data:</strong> 500 known-good connecting rods (2,000 multi-angle images)</li>
-        <li><strong>Defect Classes:</strong> Crack, lap, seam, porosity, inclusion, non-defect</li>
-        <li><strong>Decision Threshold:</strong> Tuned for &lt;0.5% false positive, &lt;1% false negative</li>
-      </ul>
-
-      <h4>Factory Integration</h4>
-      <ul>
-        <li><strong>PLC:</strong> Allen-Bradley CompactLogix via EtherNet/IP</li>
-        <li><strong>Rejection:</strong> Pneumatic diverter gate to reject chute</li>
-        <li><strong>MES:</strong> REST API for production data upload</li>
-        <li><strong>HMI:</strong> Asus AIO A3202 (Ubuntu 22.04) with touchscreen</li>
-      </ul>
-
-      <h3 id="s6-4">6.4 Inspection Workflow</h3>
-
-      <ol>
-        <li><strong>Part Loading (Automated)</strong> — Robot picks from conveyor, orients in fixture, confirms orientation via visible-light pattern matching</li>
-        <li><strong>Magnetization &amp; Particle Application (5 sec)</strong> — AC electromagnetic coil applies circular field; wet fluorescent suspension sprayed uniformly; excess drained</li>
-        <li><strong>Multi-Angle Inspection (2 sec)</strong> — Cameras simultaneously triggered; high-resolution images captured from all orientations (50ms total)</li>
-        <li><strong>AI Analysis (80ms)</strong> — Image transfer (20ms) → preprocessing (10ms) → anomaly detection in parallel (35ms) → U-Net segmentation (15ms) → PASS/FAIL fusion</li>
-        <li><strong>Result &amp; Action (20ms)</strong> — PLC signal via EtherNet/IP; PASS to output conveyor, FAIL to reject chute, VERIFY to manual station</li>
-        <li><strong>Data Logging</strong> — All images stored with serial number &amp; timestamp; defect coordinates &amp; confidence recorded; HMI updated in real-time</li>
-        <li><strong>Manual Verification (if required, &lt;2% of parts)</strong> — Operator views all images with AI-highlighted regions; confirms or overrides; feedback refines threshold</li>
-      </ol>
-
-      <h3 id="s6-5">6.5 Results and Benefits</h3>
-
-      <p><em>Performance metrics after 6 months of operation:</em></p>
-
-      <div class="metric-row" style="margin-top:16px;">
-        <div class="metric-label">Inspection Cycle Time</div>
-        <div class="metric-before">180–300 sec</div>
-        <div class="metric-after">2.1 sec</div>
+      <div class="metric-row" style="margin-top:16px; font-weight:600; color:var(--brand); font-size:13px;">
+        <div class="metric-label"></div>
+        <div class="metric-before">Before</div>
+        <div class="metric-after">After PIXIQ</div>
+        <div class="metric-delta">Improvement</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-label">Inspection cycle time</div>
+        <div class="metric-before">3–5 min</div>
+        <div class="metric-after">2.1 seconds</div>
         <div class="metric-delta">98% reduction</div>
       </div>
       <div class="metric-row">
@@ -989,100 +580,92 @@ flowchart TB
         <div class="metric-delta">8× increase</div>
       </div>
       <div class="metric-row">
-        <div class="metric-label">Detection Rate (Critical Cracks)</div>
+        <div class="metric-label">Defect detection rate</div>
         <div class="metric-before">90–95%</div>
         <div class="metric-after">99.2%</div>
-        <div class="metric-delta">4–9% improvement</div>
+        <div class="metric-delta">Up to 9% improvement</div>
       </div>
       <div class="metric-row">
-        <div class="metric-label">False Positive Rate</div>
+        <div class="metric-label">False positive rate</div>
         <div class="metric-before">15–20%</div>
         <div class="metric-after">2.8%</div>
         <div class="metric-delta">83% reduction</div>
       </div>
       <div class="metric-row">
-        <div class="metric-label">Inspector Labor</div>
+        <div class="metric-label">Inspector headcount</div>
         <div class="metric-before">4 FTEs</div>
-        <div class="metric-after">0.5 FTE</div>
+        <div class="metric-after">0.5 FTE (oversight)</div>
         <div class="metric-delta">87% reduction</div>
       </div>
       <div class="metric-row">
-        <div class="metric-label">Inspection Cost per Part</div>
+        <div class="metric-label">Cost per inspection</div>
         <div class="metric-before">$2.40</div>
         <div class="metric-after">$0.35</div>
         <div class="metric-delta">85% reduction</div>
       </div>
 
-      <h4 style="margin-top:28px;">Return on Investment</h4>
+      <h3>Return on Investment</h3>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Item</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>System Cost (hardware + software + integration)</td><td>$85,000</td></tr>
-            <tr><td>Annual Labor Savings (3.5 FTE inspectors)</td><td>$280,000</td></tr>
-            <tr><td>Annual Scrap Reduction</td><td>$45,000</td></tr>
-            <tr><td>Warranty Claim Avoidance</td><td>$150,000</td></tr>
-            <tr><td><strong>Payback Period</strong></td><td><strong>5.4 months</strong></td></tr>
-            <tr><td><strong>3-Year ROI</strong></td><td><strong>1,658%</strong></td></tr>
+            <tr><td>Annual labor savings (3.5 FTE inspectors)</td><td>$280,000</td></tr>
+            <tr><td>Annual scrap reduction (fewer false rejections)</td><td>$45,000</td></tr>
+            <tr><td>Warranty claim avoidance (escaped defects)</td><td>$150,000</td></tr>
+            <tr><td><strong>Payback period</strong></td><td><strong>5.4 months</strong></td></tr>
+            <tr><td><strong>3-year ROI</strong></td><td><strong>1,658%</strong></td></tr>
           </tbody>
         </table>
       </div>
 
-      <h3 id="s6-6">6.6 Continuous Improvement</h3>
-
-      <h4>Model Refinement</h4>
-      <ul>
-        <li>200 additional production parts used for model fine-tuning post-deployment</li>
-        <li>False positive rate reduced from 5.2% → 2.8% over 3 months</li>
-        <li>Detection sensitivity for fine cracks (&lt;0.3mm) improved with targeted training data</li>
-      </ul>
-
-      <h4>Process Insights</h4>
-      <ul>
-        <li>Anomaly score trending revealed gradual drift in forging die temperature</li>
-        <li>Proactive maintenance scheduled before defect rate increased</li>
-        <li>Estimated savings: <strong>$75,000</strong> in avoided scrap and downtime</li>
-      </ul>
-
-      <h4>Scalability</h4>
-      <ul>
-        <li>Same configuration replicated across 3 additional production lines</li>
-        <li>Cloud-based model management enables synchronized updates fleet-wide</li>
-        <li>Fleet-wide defect analytics identify systemic quality issues</li>
-      </ul>
+      <div class="callout callout-green">
+        <strong>Additional insight:</strong> Anomaly score trending over the first 6 months revealed a gradual drift in forging die temperature — before defect rates visibly increased. Proactive maintenance was scheduled, avoiding an estimated $75,000 in scrap and downtime. This kind of early warning is only possible with a fully digital inspection record.
+      </div>
     </section>
 
-    <!-- SECTION 7 -->
+    <!-- S7 FAQ -->
     <section class="section" id="s7">
       <div class="section-num">Section 7</div>
-      <h2>Conclusion</h2>
+      <h2>Frequently Asked Questions</h2>
 
-      <p>
-        Magnetic Particle Inspection remains an indispensable non-destructive testing method for ensuring the integrity of critical ferromagnetic components. However, traditional manual inspection faces increasing challenges in meeting the throughput, consistency, and quality demands of modern manufacturing.
-      </p>
+      <div class="faq-item">
+        <div class="faq-q">How small of a crack can the system detect?</div>
+        <div class="faq-a">The minimum detectable size is determined by your quality standard. We design the camera and lens setup specifically for your parts to ensure that the smallest crack you need to find is clearly visible to the AI — typically covering at least 3–5 pixels in the image.</div>
+      </div>
 
-      <p>Machine vision technology, powered by advanced AI and optimized edge computing platforms like PixIQ, offers a transformative solution. By automating the inspection process, manufacturers achieve:</p>
+      <div class="faq-item">
+        <div class="faq-q">How accurate is the AI? Can it make mistakes?</div>
+        <div class="faq-a">Accuracy is tuned during the pilot phase using your actual parts and quality criteria. The system is configured to prioritize eliminating false accepts (passing a defective part), and performance is validated against your specific thresholds before go-live. Like any AI system, accuracy improves as more production data is collected over time.</div>
+      </div>
 
-      <ul>
-        <li><strong>Uncompromising Quality:</strong> &gt;99% defect detection rates with minimal false positives</li>
-        <li><strong>Unprecedented Throughput:</strong> 5–10× productivity improvement enabling in-line continuous flow</li>
-        <li><strong>Operational Consistency:</strong> Eliminates human variability and fatigue</li>
-        <li><strong>Rich Data Capture:</strong> Complete traceability and statistical process control</li>
-        <li><strong>Rapid Deployment:</strong> Days to weeks implementation vs. months for traditional systems</li>
-        <li><strong>Economic Viability:</strong> Payback periods of 6–18 months in high-volume applications</li>
-      </ul>
+      <div class="faq-item">
+        <div class="faq-q">How much data do we need to start, and how long does it take?</div>
+        <div class="faq-a">We typically need around 150 images of defective parts and 300 images of good parts to build an initial working model. The entire process — from starting data collection to a fully deployed and validated system — usually takes <strong>4 to 8 weeks</strong>. Importantly, Phase 1 (anomaly detection on good parts only) can go live from day one.</div>
+      </div>
 
-      <p>
-        The connecting rod use case demonstrates the real-world impact: an 8× throughput increase, 98% cycle time reduction, and complete elimination of escaped defects — while dramatically reducing labor costs and improving operator safety.
-      </p>
+      <div class="faq-item">
+        <div class="faq-q">Will this replace our existing MPI machine?</div>
+        <div class="faq-a">No. The PIXIQ system is a <strong>non-invasive add-on</strong>. It uses a camera to observe your current MPI process without changing your magnetization, fluid bath, or part handling fixtures.</div>
+      </div>
 
-      <p>
-        As manufacturing continues its digital transformation journey, AI-powered machine vision systems like PixIQ will become standard infrastructure. Organizations that embrace this evolution will gain decisive competitive advantages in quality, efficiency, and operational excellence.
-      </p>
+      <div class="faq-item">
+        <div class="faq-q">How fast is the inspection? Can it keep up with our production line?</div>
+        <div class="faq-a">The end-to-end cycle time — from capturing an image to sending a Pass/Fail result to your PLC — is typically <strong>less than 100 milliseconds</strong>. For a part that requires multiple images (e.g., rotating it 8 times), a full inspection can be completed in under a second, easily keeping up with most production lines.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What happens if the AI or camera stops working?</div>
+        <div class="faq-a">The system has built-in safety checks. If the AI engine fails or the camera gets disconnected, it immediately sends a "not ready" status to your PLC. This ensures no part can ever be passed through without being properly inspected.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Does the operator lose control over the process?</div>
+        <div class="faq-a">Not at all. The operator has a full interface (HMI) that allows them to manually capture images, adjust settings, and — most importantly — override any AI decision if they see a problem. A human is always in control.</div>
+      </div>
 
       <div class="callout callout-amber" style="margin-top:28px;">
-        <strong>Contact DhvaniAI Technologies</strong><br/>
-        To discuss PixIQ's application to your specific manufacturing challenges:<br/>
+        <strong>Have a question not covered here?</strong><br/>
+        Reach out to our technical team — we're happy to discuss your specific application.<br/>
         🌐 <a href="https://www.dhvaniai.com" style="color:inherit;">www.dhvaniai.com</a> &nbsp;·&nbsp;
         ✉️ <a href="mailto:info@dhvaniai.com" style="color:inherit;">info@dhvaniai.com</a>
       </div>
@@ -1100,8 +683,5 @@ flowchart TB
   </p>
 </footer>
 
-<script>
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral', securityLevel: 'loose' });
-</script>
 </body>
 </html>
