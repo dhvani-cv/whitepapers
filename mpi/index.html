@@ -791,42 +791,42 @@
       <h2>Frequently Asked Questions</h2>
 
       <div class="faq-item">
-        <div class="faq-q">How small of a crack can the system detect?</div>
+        <div class="faq-q">Q1. How small of a crack can the system detect?</div>
         <div class="faq-a">The minimum detectable size is determined by your quality standard. We design the camera and lens setup specifically for your parts to ensure that the smallest crack you need to find is clearly visible to the AI — typically covering at least 3–5 pixels in the image.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">How accurate is the AI? Can it make mistakes?</div>
+        <div class="faq-q">Q2. How accurate is the AI? Can it make mistakes?</div>
         <div class="faq-a">Accuracy is tuned during the pilot phase using your actual parts and quality criteria. The system is configured to prioritize eliminating false accepts (passing a defective part), and performance is validated against your specific thresholds before go-live. Like any AI system, accuracy improves as more production data is collected over time.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">How much data do we need to start, and how long does it take?</div>
+        <div class="faq-q">Q3. How much data do we need to start, and how long does it take?</div>
         <div class="faq-a">We typically need around 150 images of defective parts and 300 images of good parts to build an initial working model. The entire process — from starting data collection to a fully deployed and validated system — usually takes <strong>4 to 8 weeks</strong>. Importantly, Phase 1 (anomaly detection on good parts only) can go live from day one.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Will this replace our existing MPI machine?</div>
+        <div class="faq-q">Q4. Will this replace our existing MPI machine?</div>
         <div class="faq-a">No. The PIXIQ system is a <strong>non-invasive add-on</strong>. It uses a camera to observe your current MPI process without changing your magnetization, fluid bath, or part handling fixtures.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">How fast is the inspection? Can it keep up with our production line?</div>
+        <div class="faq-q">Q5. How fast is the inspection? Can it keep up with our production line?</div>
         <div class="faq-a">The end-to-end cycle time — from capturing an image to sending a Pass/Fail result to your PLC — is typically <strong>less than 100 milliseconds</strong>. For a part that requires multiple images (e.g., rotating it 8 times), a full inspection can be completed in under a second, easily keeping up with most production lines.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">What happens if the AI or camera stops working?</div>
+        <div class="faq-q">Q6. What happens if the AI or camera stops working?</div>
         <div class="faq-a">The system has built-in safety checks. If the AI engine fails or the camera gets disconnected, it immediately sends a "not ready" status to your PLC. This ensures no part can ever be passed through without being properly inspected.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Does the operator lose control over the process?</div>
+        <div class="faq-q">Q7. Does the operator lose control over the process?</div>
         <div class="faq-a">Not at all. The operator has a full interface (HMI) that allows them to manually capture images, adjust settings, and — most importantly — override any AI decision if they see a problem. A human is always in control.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">How does the system handle reflections from the wet fluorescent carrier liquid?</div>
+        <div class="faq-q">Q8. How does the system handle reflections from the wet fluorescent carrier liquid?</div>
         <div class="faq-a">
           Specular reflections from the wet suspension are one of the primary imaging challenges in fluorescent MPI, and the system is designed around this from the ground up. We address it at two levels:
           <ul style="margin-top:8px; margin-bottom:0; padding-left:20px;">
@@ -838,7 +838,7 @@
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">What is the false alarm rate during the early phases, and how much work does that create for operators?</div>
+        <div class="faq-q">Q9. What is the false alarm rate during the early phases, and how much work does that create for operators?</div>
         <div class="faq-a">
           During Phase 1 (anomaly baseline), the false alarm rate is intentionally elevated — the system flags anything unusual while it is still learning the normal variation of your specific parts and process. Operators can expect to review roughly <strong>5–15 flagged parts per shift</strong> in the first few weeks. This drops sharply as the model absorbs confirmed good-part variation, typically falling to <strong>under 3 per shift</strong> by the end of Phase 2.<br/><br/>
           Critically, this review burden is designed to be low-effort: the HMI routes flagged parts to a dedicated station and highlights only the region the AI questioned. The operator makes a quick confirm/dismiss decision — not a full re-inspection. Every decision is logged and fed back into the next training cycle, so the operator's time during this period directly accelerates the model's improvement.
