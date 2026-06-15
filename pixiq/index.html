@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PixIQ — AI Vision Controller Platform · DhvaniAI White Paper</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:  #0f3460;
+      --accent: #e94560;
+      --text:   #1a1a2e;
+      --muted:  #555e6d;
+      --border: #e2e8f0;
+      --bg:     #f8f9fa;
+      --white:  #ffffff;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* ── NAV ── */
+    .topnav {
+      background: var(--brand);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .topnav a { color: #a8b2c8; text-decoration: none; }
+    .topnav a:hover { color: white; }
+    .topnav .sep { color: #4a5568; }
+    .topnav .current { color: white; font-weight: 600; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+      color: white;
+      padding: 56px 40px 48px;
+      border-bottom: 4px solid var(--accent);
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: rgba(233,69,96,0.2);
+      color: #f87091;
+      border: 1px solid rgba(233,69,96,0.4);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.25;
+      max-width: 740px;
+      margin-bottom: 16px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: #a8b2c8;
+      margin-bottom: 20px;
+    }
+    .hero-summary {
+      font-size: 16px;
+      color: #c8d0e0;
+      max-width: 720px;
+      line-height: 1.75;
+    }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: flex;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      gap: 48px;
+      align-items: flex-start;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      width: 210px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 24px;
+    }
+    .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #6c757d;
+      margin-bottom: 12px;
+    }
+    .toc ol { list-style: none; padding: 0; }
+    .toc li { margin-bottom: 2px; }
+    .toc a {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .toc a:hover {
+      color: var(--brand);
+      background: #eef1f7;
+      border-left-color: var(--brand);
+    }
+
+    /* ── CONTENT ── */
+    .content { flex: 1; min-width: 0; }
+
+    .section {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--brand);
+      margin: 28px 0 10px;
+    }
+
+    h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin: 20px 0 8px;
+    }
+
+    p { margin-bottom: 14px; color: var(--muted); font-size: 15px; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { font-size: 15px; color: var(--muted); margin-bottom: 6px; }
+    strong { color: var(--text); font-weight: 600; }
+
+    /* ── CALLOUTS ── */
+    .callout {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+      border-left: 4px solid;
+      line-height: 1.6;
+    }
+    .callout-blue  { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
+    .callout-green { background: #f0fdf4; border-color: #22c55e; color: #166534; }
+    .callout-amber { background: #fffbeb; border-color: #f59e0b; color: #92400e; }
+    .callout strong { color: inherit; }
+
+    /* ── TABLES ── */
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead tr { background: var(--brand); color: white; }
+    thead th { padding: 11px 14px; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody tr:nth-child(even) { background: #f7f9fc; }
+    tbody tr:hover { background: #eef1f7; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--muted); vertical-align: top; }
+
+    /* ── STAT GRID ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, var(--brand), #16213e);
+      border-radius: 10px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+    .stat-value { font-size: 26px; font-weight: 800; color: #7dd3fc; display: block; }
+    .stat-label { font-size: 12px; color: #a8b2c8; margin-top: 4px; }
+
+    /* ── CAPABILITY CARDS ── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .cap-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      background: #fafbfc;
+    }
+    .cap-icon { font-size: 24px; margin-bottom: 10px; }
+    .cap-title { font-size: 14px; font-weight: 700; color: var(--brand); margin-bottom: 6px; }
+    .cap-body { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ── TWO-SYSTEM BLOCK ── */
+    .dual-system {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .sys-box {
+      border-radius: 10px;
+      padding: 22px;
+      border: 2px solid;
+    }
+    .sys-box.controller { background: #f0fdf4; border-color: #388e3c; }
+    .sys-box.hmi        { background: #f3e5f5; border-color: #7b1fa2; }
+    .sys-box h4 { margin-top: 0; font-size: 14px; }
+    .sys-box.controller h4 { color: #1b5e20; }
+    .sys-box.hmi h4        { color: #4a148c; }
+    .sys-box ul { margin-bottom: 0; }
+    .sys-box li { font-size: 13px; }
+
+    /* ── MODE CARDS ── */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .mode-card {
+      border-radius: 10px;
+      padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .mode-card.inspect { background: #eff6ff; border-color: #3b82f6; }
+    .mode-card.train   { background: #f0fdf4; border-color: #22c55e; }
+    .mode-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .mode-card.inspect .mode-number { color: #1d4ed8; }
+    .mode-card.train   .mode-number { color: #15803d; }
+    .mode-card h4 { font-size: 16px; margin-bottom: 8px; }
+    .mode-card.inspect h4 { color: #1e40af; }
+    .mode-card.train   h4 { color: #166534; }
+    .mode-card p { font-size: 14px; margin-bottom: 0; }
+    .mode-card.inspect p { color: #1e40af; }
+    .mode-card.train   p { color: #166534; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 36px 24px;
+      font-size: 13px;
+      color: #aaa;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--brand); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      .toc { display: none; }
+      .layout { padding: 20px 16px; }
+      .hero { padding: 36px 20px; }
+      .hero h1 { font-size: 24px; }
+      .section { padding: 24px 18px; }
+      .topnav { padding: 14px 20px; }
+      .dual-system { grid-template-columns: 1fr; }
+      .mode-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <a href="../index.html">DhvaniAI White Papers</a>
+  <span class="sep">›</span>
+  <span class="current">PixIQ Platform</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Industrial AI · Platform White Paper</div>
+  <h1>PixIQ: The AI-Powered Vision Controller for Factory Inspection</h1>
+  <div class="hero-meta">
+    <span>📅 2025</span>
+    <span>🏢 DhvaniAI Technologies</span>
+    <span>📖 ~12 min read</span>
+    <span>📄 v1.0</span>
+  </div>
+  <p class="hero-summary">
+    PixIQ is a plug-and-play AI vision controller that reduces factory inspection deployment from months to days. This paper covers what PixIQ is, how it is architected for real-time performance, what it can inspect, and how it is managed across a production fleet.
+  </p>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- TOC -->
+  <aside class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#s1">1. What is PixIQ?</a></li>
+      <li><a href="#s2">2. The Problem It Solves</a></li>
+      <li><a href="#s3">3. System Architecture</a></li>
+      <li><a href="#s4">4. Two Operating Modes</a></li>
+      <li><a href="#s5">5. AI Capabilities</a></li>
+      <li><a href="#s6">6. Factory Integration</a></li>
+      <li><a href="#s7">7. Cloud Management</a></li>
+      <li><a href="#s8">8. Where PixIQ Is Used</a></li>
+      <li><a href="#s9">9. Why PixIQ vs Custom Build</a></li>
+    </ol>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- S1 -->
+    <section class="section" id="s1">
+      <div class="section-num">Section 1</div>
+      <h2>What is PixIQ?</h2>
+
+      <p>
+        PixIQ is an <strong>AI-powered industrial vision controller</strong> developed by DhvaniAI Technologies. It is a complete, pre-integrated hardware and software platform that enables manufacturers to deploy intelligent visual inspection systems on the factory floor — in days rather than months.
+      </p>
+      <p>
+        Traditional vision system deployments require assembling a custom stack: selecting hardware, writing acquisition software, integrating AI frameworks, connecting to PLCs, building an operator interface, and wiring everything to a cloud backend. This typically takes a specialist team 6–12 months. PixIQ packages all of this into a single, validated system that arrives ready to connect.
+      </p>
+
+      <div class="callout callout-blue">
+        <strong>The core idea:</strong> PixIQ is a DIY-friendly vision platform. A customer with cameras, a production line, and a quality problem can go from unboxing to live inspection in days — without a large engineering team.
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-value">&lt;100ms</span>
+          <div class="stat-label">Trigger to PLC response</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">Days</span>
+          <div class="stat-label">Deployment time</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">20+</span>
+          <div class="stat-label">Cameras per controller</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">1-click</span>
+          <div class="stat-label">Model deployment</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S2 -->
+    <section class="section" id="s2">
+      <div class="section-num">Section 2</div>
+      <h2>The Problem It Solves</h2>
+
+      <p>Deploying a vision inspection system on a production line has historically required:</p>
+      <ul>
+        <li>A machine vision engineer to design and integrate the hardware</li>
+        <li>A software team to build acquisition, inference, and communication pipelines</li>
+        <li>An AI team to train, validate, and deploy defect detection models</li>
+        <li>A PLC integrator to connect the vision system to factory automation</li>
+        <li>Months of commissioning, debugging, and validation</li>
+      </ul>
+
+      <p>
+        The result is a bespoke system that is expensive to build, difficult to replicate across lines, and dependent on the original engineering team for updates and maintenance.
+      </p>
+
+      <p>
+        PixIQ collapses this into a single product. The hardware arrives pre-configured. The software stack is pre-integrated. AI models are trained in the cloud and deployed over the air. Factory connections use standard industrial protocols that any PLC engineer already understands. <strong>No custom software development is required to get to production.</strong>
+      </p>
+
+      <div class="callout callout-green">
+        <strong>The shift:</strong> From "build a vision system" to "configure a vision platform." The difference is the same as buying a smartphone vs. building a phone from components — the underlying technology is just as powerful, but the time-to-value collapses dramatically.
+      </div>
+    </section>
+
+    <!-- S3 -->
+    <section class="section" id="s3">
+      <div class="section-num">Section 3</div>
+      <h2>System Architecture</h2>
+
+      <p>
+        PixIQ uses a <strong>dual-system architecture</strong> that physically separates real-time AI processing from the operator interface. This is a deliberate design choice: the AI controller runs nothing but inspection. It has no screen, no browser, no user interface competing for its GPU and memory. Every CPU cycle and every byte of shared memory is dedicated to getting the inspection result out in under 100 milliseconds.
+      </p>
+
+      <div class="dual-system">
+        <div class="sys-box controller">
+          <h4>🧠 Vision Controller</h4>
+          <p style="font-size:13px; color:#2e7d32; margin-bottom:10px;">NVIDIA Jetson Orin / Asus PE1100N</p>
+          <ul>
+            <li>Camera image acquisition (CUDA-accelerated)</li>
+            <li>AI inference engine (TensorRT, &lt;40ms)</li>
+            <li>PLC communication — PASS/FAIL signals</li>
+            <li>Hardware trigger handling</li>
+            <li>Results decision logic</li>
+          </ul>
+        </div>
+        <div class="sys-box hmi">
+          <h4>🖥️ Operator HMI</h4>
+          <p style="font-size:13px; color:#6a1b9a; margin-bottom:10px;">Asus AIO A3202 / Industrial Panel PC</p>
+          <ul>
+            <li>Live inspection feed with defect overlays</li>
+            <li>Production statistics dashboard</li>
+            <li>Local database and audit trail</li>
+            <li>MES / ERP integration gateway</li>
+            <li>Multi-role access control</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        The two systems communicate over a local Ethernet connection. The Vision Controller pushes inspection results and images to the HMI asynchronously — the critical path (camera → AI → PLC) never waits for the HMI. If the HMI is rebooting or offline, inspection continues uninterrupted.
+      </p>
+
+      <h3>Real-Time Performance Design</h3>
+      <p>
+        The inspection critical path — from hardware trigger to PLC response — is engineered for deterministic sub-100ms performance. Every component on this path runs natively on the controller hardware with the highest process priority, direct GPU memory access, and pre-allocated image buffers. Nothing on the critical path runs inside a container or shares resources with non-inspection services.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>Process</th><th>Budget</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Camera capture</td><td>GigE image acquisition, CUDA transfer</td><td>&lt;20ms</td></tr>
+            <tr><td>Pre-processing</td><td>Resize, normalise, denoise (GPU)</td><td>&lt;10ms</td></tr>
+            <tr><td>AI inference</td><td>TensorRT optimised model</td><td>&lt;40ms</td></tr>
+            <tr><td>Decision + PLC</td><td>Business logic, digital output signal</td><td>&lt;10ms</td></tr>
+            <tr><td><strong>Total critical path</strong></td><td><strong>Trigger to PLC response</strong></td><td><strong>&lt;100ms</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Supported Cameras</h3>
+      <p>PixIQ supports the most widely used industrial camera manufacturers out of the box, with no custom driver development required:</p>
+      <ul>
+        <li>Basler (GigE, USB3)</li>
+        <li>The Imaging Source</li>
+        <li>FLIR / Point Grey</li>
+        <li>IDS Imaging</li>
+      </ul>
+      <p>Cameras connect via GigE to an 8-port managed switch on the controller. Power over Ethernet (PoE+) is supported, eliminating separate power runs to each camera.</p>
+    </section>
+
+    <!-- S4 -->
+    <section class="section" id="s4">
+      <div class="section-num">Section 4</div>
+      <h2>Two Operating Modes</h2>
+
+      <p>Every PixIQ device operates in one of two modes. Switching between them is done from the HMI without any engineering intervention.</p>
+
+      <div class="mode-grid">
+        <div class="mode-card inspect">
+          <div class="mode-number">Mode 1</div>
+          <h4>Inspection Mode</h4>
+          <p>
+            The system runs live production inspection. Every part that passes through the camera field of view is analysed by the AI model and a PASS, FAIL, or VERIFY result is sent to the PLC within 100ms. All images and results are logged to the local database and streamed to the HMI in real time.
+          </p>
+        </div>
+        <div class="mode-card train">
+          <div class="mode-number">Mode 2</div>
+          <h4>Training Mode</h4>
+          <p>
+            The system captures and uploads images to the DhvaniAI cloud platform for annotation and model training. Once a new model is trained on A100 GPU infrastructure in the cloud, it can be deployed back to the PixIQ device with a single click — no local engineering required.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-blue">
+        <strong>The training loop in practice:</strong> Run in Training Mode for a few shifts to collect images of your part. Upload to the cloud. Our team (or yours) annotates good and defective examples. A new model is trained and validated. One click deploys it to the device. Switch back to Inspection Mode.
+      </div>
+    </section>
+
+    <!-- S5 -->
+    <section class="section" id="s5">
+      <div class="section-num">Section 5</div>
+      <h2>AI Capabilities</h2>
+
+      <p>PixIQ supports multiple AI model types, each suited to a different class of inspection problem. The right model is selected during the setup phase based on the inspection task.</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-icon">🔍</div>
+          <div class="cap-title">Anomaly Detection</div>
+          <div class="cap-body">Trains on good parts only. Flags anything that deviates from normal. Best for new production lines or where defect examples are scarce. No defect images needed to go live.</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🗺️</div>
+          <div class="cap-title">Defect Segmentation</div>
+          <div class="cap-body">Pixel-level localisation of defect regions (U-Net architecture). Used when defect location and size matter — such as measuring crack length or marking the exact defect position on the image.</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">📦</div>
+          <div class="cap-title">Object Detection</div>
+          <div class="cap-body">Identifies and locates specific features or objects in the image (YOLO architecture). Used for part presence/absence checks, orientation verification, and assembly inspection.</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🔤</div>
+          <div class="cap-title">OCR / Text Reading</div>
+          <div class="cap-body">Reads printed text, laser-etched codes, date stamps, and part numbers directly from the production line. Used for traceability and label verification.</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">🏷️</div>
+          <div class="cap-title">Classification</div>
+          <div class="cap-body">Categorises parts or defects into defined classes (e.g., crack vs. lap vs. seam). Used when the type of defect matters for downstream process decisions.</div>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">📐</div>
+          <div class="cap-title">Dimension Inspection</div>
+          <div class="cap-body">Data-driven dimensional verification using vision — checking gap widths, hole diameters, and part geometry without physical gauges. <em>In active development.</em></div>
+        </div>
+      </div>
+
+      <div class="callout callout-amber">
+        <strong>Model selection is not permanent.</strong> Because models are managed in the cloud and deployed over the air, a PixIQ device on a connecting rod line today can be reconfigured for a camshaft line tomorrow — without any hardware change and without an engineer on site.
+      </div>
+    </section>
+
+    <!-- S6 -->
+    <section class="section" id="s6">
+      <div class="section-num">Section 6</div>
+      <h2>Factory Integration</h2>
+
+      <p>PixIQ is designed to drop into an existing production line without disrupting the surrounding automation. It speaks the same protocols that factory PLCs already use, and it outputs standard digital signals that any rejection mechanism can act on.</p>
+
+      <h3>PLC Communication</h3>
+      <ul>
+        <li><strong>Modbus TCP/IP</strong> — the most widely supported industrial protocol, compatible with virtually all PLC brands</li>
+        <li><strong>OPC-UA</strong> — for modern SCADA and MES integrations requiring richer data exchange</li>
+        <li><strong>EtherNet/IP</strong> — for Allen-Bradley and Rockwell Automation environments</li>
+        <li><strong>Digital I/O (24VDC)</strong> — direct wiring for simple PASS/FAIL signals and trigger inputs</li>
+      </ul>
+
+      <h3>Triggering</h3>
+      <p>
+        Inspection is triggered by a proximity sensor or PLC signal the moment a part enters the camera field of view. Hardware triggering ensures the camera captures at exactly the right moment — <strong>synchronisation accuracy is under 1ms</strong> across all connected cameras simultaneously.
+      </p>
+
+      <h3>Rejection Control</h3>
+      <p>
+        On a FAIL result, PixIQ sends an immediate digital output signal to the rejection mechanism — typically a pneumatic gate or diverter. On a VERIFY result, the part is routed to a manual review station where the operator sees the AI-highlighted image and makes the final call. On PASS, the line continues with no interruption.
+      </p>
+
+      <h3>MES / ERP Integration</h3>
+      <p>
+        The HMI exposes a REST API that allows L3 manufacturing execution systems and ERP platforms to pull inspection data in real time — part serial numbers, inspection timestamps, results, defect coordinates, and images. This enables factory-wide quality dashboards without any custom middleware.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Integration Point</th><th>Method</th><th>Typical Use</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Factory PLC</td><td>Modbus TCP / OPC-UA / EtherNet/IP</td><td>PASS/FAIL signals, cycle control</td></tr>
+            <tr><td>Proximity sensor</td><td>24VDC digital input</td><td>Part detection, inspection trigger</td></tr>
+            <tr><td>Rejection gate</td><td>24VDC digital output</td><td>Pneumatic actuator, diverter control</td></tr>
+            <tr><td>Inspection lighting</td><td>Digital trigger signal</td><td>Synchronised strobe with camera capture</td></tr>
+            <tr><td>MES / ERP</td><td>REST API (HMI)</td><td>Production data, quality records</td></tr>
+            <tr><td>Cloud platform</td><td>HTTPS / MQTT (optional)</td><td>Model updates, fleet analytics</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S7 -->
+    <section class="section" id="s7">
+      <div class="section-num">Section 7</div>
+      <h2>Cloud Management</h2>
+
+      <p>
+        Every PixIQ device is connected to the DhvaniAI cloud platform. From a single dashboard, engineers and quality managers can oversee an entire fleet of deployed devices across multiple production lines and facilities.
+      </p>
+
+      <h3>Device Hierarchy</h3>
+      <p>Each device in the cloud platform is organised into three levels:</p>
+      <ul>
+        <li><strong>Workflows</strong> — the inspection processes configured on the device (e.g., "top-face inspection", "bore inspection")</li>
+        <li><strong>Data</strong> — all images, results, and logs captured by the device</li>
+        <li><strong>Models</strong> — the AI models assigned to each workflow, with version history</li>
+      </ul>
+
+      <h3>One-Click Model Deployment</h3>
+      <p>
+        When a new or updated AI model is ready, it is pushed to one or many devices simultaneously from the cloud dashboard. The device downloads the model, validates it, and hot-swaps it into the inspection pipeline — <strong>without stopping production</strong>. The previous model version is retained and can be rolled back instantly if needed.
+      </p>
+
+      <h3>Over-the-Air Software Updates</h3>
+      <p>
+        The full PixIQ software stack on both the Vision Controller and HMI is managed through Azure IoT Edge. Software updates, configuration changes, and security patches are pushed over the air without requiring an engineer to visit the site.
+      </p>
+
+      <h3>Fleet-Wide Analytics</h3>
+      <p>
+        The cloud platform aggregates inspection data across all connected devices. Quality managers can compare defect rates across production lines, track model performance over time, identify systemic process issues across facilities, and generate compliance reports — all from a single interface.
+      </p>
+
+      <div class="callout callout-green">
+        <strong>Multi-site scaling:</strong> Once a model is validated on one production line, replicating it to 10 more lines across 3 facilities is a single cloud operation. No engineer travel required.
+      </div>
+    </section>
+
+    <!-- S8 -->
+    <section class="section" id="s8">
+      <div class="section-num">Section 8</div>
+      <h2>Where PixIQ Is Used</h2>
+
+      <p>PixIQ is a general-purpose inspection platform. The AI model and camera configuration change per application — the controller, software stack, and factory integration remain the same.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Application</th><th>Industry</th><th>AI Model</th><th>What It Detects</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Magnetic Particle Inspection</strong></td>
+              <td>Automotive, Aerospace</td>
+              <td>Anomaly + Segmentation</td>
+              <td>Surface cracks, laps, seams in forged components</td>
+            </tr>
+            <tr>
+              <td><strong>Weld Inspection</strong></td>
+              <td>Heavy manufacturing</td>
+              <td>Segmentation</td>
+              <td>Porosity, underfill, spatter, incomplete fusion</td>
+            </tr>
+            <tr>
+              <td><strong>Surface Finish Inspection</strong></td>
+              <td>Consumer goods, Automotive</td>
+              <td>Anomaly</td>
+              <td>Scratches, dents, contamination, colour variation</td>
+            </tr>
+            <tr>
+              <td><strong>Assembly Verification</strong></td>
+              <td>Electronics, Automotive</td>
+              <td>Object Detection</td>
+              <td>Missing components, wrong part, incorrect orientation</td>
+            </tr>
+            <tr>
+              <td><strong>Label &amp; Marking Verification</strong></td>
+              <td>Pharma, Food, Logistics</td>
+              <td>OCR</td>
+              <td>Batch codes, expiry dates, serial numbers, barcodes</td>
+            </tr>
+            <tr>
+              <td><strong>Casting &amp; Forging Inspection</strong></td>
+              <td>Automotive, Industrial</td>
+              <td>Segmentation</td>
+              <td>Porosity, shrinkage cracks, flash, misruns</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S9 -->
+    <section class="section" id="s9">
+      <div class="section-num">Section 9</div>
+      <h2>Why PixIQ vs. Building a Custom System</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Dimension</th><th>Custom Build</th><th>PixIQ</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Deployment Time</strong></td>
+              <td>6–12 months</td>
+              <td>Days to weeks</td>
+            </tr>
+            <tr>
+              <td><strong>Team Required</strong></td>
+              <td>Vision engineer, AI engineer, PLC integrator, software team</td>
+              <td>1 technician for hardware setup</td>
+            </tr>
+            <tr>
+              <td><strong>AI Model Updates</strong></td>
+              <td>Requires engineering team on site or remote access</td>
+              <td>One-click cloud deployment</td>
+            </tr>
+            <tr>
+              <td><strong>Replication to New Lines</strong></td>
+              <td>Repeat full development cycle</td>
+              <td>Clone configuration in cloud dashboard</td>
+            </tr>
+            <tr>
+              <td><strong>Software Maintenance</strong></td>
+              <td>Internal or vendor dependency</td>
+              <td>OTA updates managed by DhvaniAI</td>
+            </tr>
+            <tr>
+              <td><strong>Multi-Site Analytics</strong></td>
+              <td>Custom integration project</td>
+              <td>Built-in fleet dashboard</td>
+            </tr>
+            <tr>
+              <td><strong>Typical Cost</strong></td>
+              <td>High (engineering time dominates)</td>
+              <td>Predictable hardware + licensing</td>
+            </tr>
+            <tr>
+              <td><strong>Risk</strong></td>
+              <td>High — bespoke systems are fragile</td>
+              <td>Low — validated, supported platform</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-amber">
+        <strong>The honest trade-off:</strong> A fully custom system built by a skilled team can be more tightly optimised for one specific application. PixIQ trades that last 5% of optimisation for a 10× reduction in deployment time and a platform that is maintainable by your own operations team — not just the engineers who built it.
+      </div>
+
+      <div class="callout callout-amber" style="margin-top: 20px;">
+        <strong>Want to discuss your application?</strong><br/>
+        Reach out to our technical team — we can assess whether PixIQ is the right fit for your inspection challenge and what timeline looks like.<br/>
+        🌐 <a href="https://www.dhvaniai.com" style="color:inherit;">www.dhvaniai.com</a> &nbsp;·&nbsp;
+        ✉️ <a href="mailto:info@dhvaniai.com" style="color:inherit;">info@dhvaniai.com</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p><strong>DhvaniAI Technologies</strong> &nbsp;·&nbsp; Document v1.0 &nbsp;·&nbsp; 2025</p>
+  <p style="margin-top:6px;">
+    <a href="../index.html">← All White Papers</a> &nbsp;·&nbsp;
+    <a href="https://www.dhvaniai.com">www.dhvaniai.com</a> &nbsp;·&nbsp;
+    <a href="mailto:info@dhvaniai.com">info@dhvaniai.com</a>
+  </p>
+</footer>
+
+</body>
+</html>
