@@ -590,6 +590,20 @@
         The PIXIQ Controller sits at the centre — it receives images from the cameras, runs the AI, and simultaneously signals the factory PLC (to open or close the rejection gate) and updates the operator HMI. The cloud connection is optional and used for model updates and fleet-wide analytics.
       </p>
 
+      <h3 style="margin-top:32px;">Step-by-Step Process Flow</h3>
+      <p>The diagram below shows how a single inspection cycle flows through the system — from the operator starting inspection mode on the HMI, through PLC triggering and image capture, to the AI result being returned to the PLC and displayed on screen.</p>
+
+      <div style="margin: 20px 0; text-align:center;">
+        <img
+          src="process-flow.png"
+          alt="PIXIQ MPI process flow — PLC to PIXIQ to HMI working flow with step-by-step breakdown"
+          style="max-width:100%; border-radius:10px; border:1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.07);"
+        />
+        <p style="font-size:12px; color:#aaa; margin-top:10px;">
+          PLC → PIXIQ → HMI working flow: from cycle start to Pass/Fail result
+        </p>
+      </div>
+
     </section>
 
     <!-- S6 -->
