@@ -321,10 +321,11 @@
       <li><a href="#s2">2. Why Use AI?</a></li>
       <li><a href="#s3">3. How the AI Works</a></li>
       <li><a href="#s4">4. Key Advantages</a></li>
-      <li><a href="#s5">5. System Overview</a></li>
-      <li><a href="#s6">6. Project Lifecycle</a></li>
-      <li><a href="#s7">7. Use Case: Connecting Rod</a></li>
-      <li><a href="#s8">8. FAQ</a></li>
+      <li><a href="#s5">5. The PixIQ Platform</a></li>
+      <li><a href="#s6">6. System Overview</a></li>
+      <li><a href="#s7">7. Project Lifecycle</a></li>
+      <li><a href="#s8">8. Use Case: Connecting Rod</a></li>
+      <li><a href="#s9">9. FAQ</a></li>
     </ol>
   </aside>
 
@@ -460,8 +461,8 @@
     </section>
 
     <!-- S5 BLOCK DIAGRAM -->
-    <section class="section" id="s5">
-      <div class="section-num">Section 5</div>
+    <section class="section" id="s6">
+      <div class="section-num">Section 6</div>
       <h2>System Overview</h2>
 
       <p>The PIXIQ system connects directly into your existing MPI line. Here is how the components fit together — from the part on the line to the operator screen and factory PLC.</p>
@@ -607,8 +608,8 @@
     </section>
 
     <!-- S6 -->
-    <section class="section" id="s6">
-      <div class="section-num">Section 6</div>
+    <section class="section" id="s7">
+      <div class="section-num">Section 7</div>
       <h2>Project Lifecycle: What to Expect</h2>
 
 
@@ -694,8 +695,8 @@
     </section>
 
     <!-- S7 -->
-    <section class="section" id="s7">
-      <div class="section-num">Section 7</div>
+    <section class="section" id="s8">
+      <div class="section-num">Section 8</div>
       <h2>Use Case: Connecting Rod Inspection</h2>
 
       <p>
@@ -719,7 +720,7 @@
 
       <h3>The Challenge</h3>
       <ul>
-        <li>Complex geometry requiring inspection from <strong>4–6 orientations</strong></li>
+        <li>Complex geometry requiring inspection across the full 360° surface</li>
         <li>Inspection time of <strong>3–5 minutes per part</strong> creating a production bottleneck</li>
         <li>Manual throughput limited to <strong>~150 parts per shift</strong> per inspector</li>
         <li>False negative risk of <strong>5–10%</strong> due to operator fatigue</li>
@@ -729,7 +730,7 @@
 
       <h3>The PIXIQ Solution</h3>
       <p>
-        Four industrial cameras capture simultaneous multi-angle images of each connecting rod. The PIXIQ AI runs anomaly detection and defect segmentation in parallel, returning a PASS, FAIL, or VERIFY result — with the defect highlighted on screen — in under 100ms. FAIL parts are automatically diverted by a pneumatic gate before reaching the next station.
+        A single industrial camera captures the connecting rod as it rotates in 20° increments, giving <strong>18 images of the full surface</strong> in one inspection cycle. Each image is analysed by the PIXIQ AI as it arrives — anomaly detection and defect segmentation run in parallel across the image sequence — and a combined PASS, FAIL, or VERIFY result is returned with the defect highlighted on screen. FAIL parts are automatically diverted by a pneumatic gate before reaching the next station.
       </p>
       <p>
         The system was trained on <strong>500 known-good connecting rods</strong>. No defect examples were needed to go live. Defect-confirmed data collected during the pilot phase was used to refine the model over the following months.
@@ -799,9 +800,9 @@
       </div>
     </section>
 
-    <!-- S8 FAQ -->
-    <section class="section" id="s8">
-      <div class="section-num">Section 8</div>
+    <!-- S9 FAQ -->
+    <section class="section" id="s9">
+      <div class="section-num">Section 9</div>
       <h2>Frequently Asked Questions</h2>
 
       <div class="faq-item">
@@ -826,7 +827,7 @@
 
       <div class="faq-item">
         <div class="faq-q">Q5. How fast is the inspection? Can it keep up with our production line?</div>
-        <div class="faq-a">The end-to-end cycle time — from capturing an image to sending a Pass/Fail result to your PLC — is typically <strong>less than 100 milliseconds</strong>. For a part that requires multiple images (e.g., rotating it 8 times), a full inspection can be completed in under a second, easily keeping up with most production lines.</div>
+        <div class="faq-a">The end-to-end cycle time — from capturing an image to sending a Pass/Fail result to your PLC — is typically <strong>less than 100 milliseconds</strong>. For a part inspected across a full 360° rotation in 20° steps (18 images), a complete surface inspection can be completed in under 2 seconds, easily keeping up with most production lines.</div>
       </div>
 
       <div class="faq-item">
