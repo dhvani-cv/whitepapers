@@ -806,42 +806,81 @@
       <h2>Frequently Asked Questions</h2>
 
       <div class="faq-item">
-        <div class="faq-q">Q1. How small of a crack can the system detect?</div>
+        <div class="faq-q">Q1. A human inspector can walk around a part and see it from any angle. Why does a camera need help to do the same thing?</div>
+        <div class="faq-a">
+          A human inspector does something remarkable without thinking about it: they continuously move their head, tilt the part, change their viewing angle, and adjust the light — all in real time — until every surface is visible. A camera is fixed. It sees exactly one angle, frozen in one position, at one moment in time.<br/><br/>
+          On a production line running at speed, there is no time to reposition a camera between parts. So the choice is:
+          <ul style="margin-top:8px; margin-bottom:8px; padding-left:20px;">
+            <li>Use <strong>multiple fixed cameras</strong>, each covering a zone the others cannot see, all triggering simultaneously</li>
+            <li>Or <strong>rotate the part</strong> in front of a single camera, capturing images at set angular intervals until the full surface has been seen</li>
+          </ul>
+          For the connecting rod inspection described in this paper, we rotate the part in 20° steps and capture 18 images — covering the full 360° surface. It is the digital equivalent of a human turning the part in their hands, except it happens the same way, at the same speed, for every single part, every single shift.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q2. How many cameras do we need for our part, and how do you decide that?</div>
+        <div class="faq-a">
+          The number of cameras depends entirely on the geometry of your part and whether it can be rotated.<br/><br/>
+          <strong>If the part can rotate</strong> (on a fixture, conveyor turntable, or robotic gripper), a single camera is often sufficient. The part turns in front of it — typically in equal angular steps — until every surface has been presented to the camera. For the connecting rod in this paper, one camera captures 18 images as the part rotates in 20° increments, covering the full 360° surface.<br/><br/>
+          <strong>If the part cannot rotate</strong> — because it is moving on a flat conveyor, held in a fixed fixture, or too large to handle — then multiple cameras are placed at different angles to cover the surfaces that a single fixed camera would miss. Think of it as placing one inspector at each blind spot.<br/><br/>
+          A simple rule of thumb:
+          <ul style="margin-top:8px; margin-bottom:8px; padding-left:20px;">
+            <li><strong>Flat or 2D parts</strong> (sheet metal, PCBs, gaskets) → 1 camera, top-down</li>
+            <li><strong>Cylindrical parts that can rotate</strong> (shafts, rods, pins) → 1 camera + rotation fixture</li>
+            <li><strong>Complex 3D parts that cannot rotate</strong> (engine blocks, large castings) → 2–4 cameras at complementary angles</li>
+          </ul>
+          We determine the camera count during the discovery phase by mapping which surfaces need to be inspected against what a single fixed camera can physically see. We then design the minimum camera arrangement that leaves no blind spots — more cameras adds cost and complexity, so we only add what is necessary.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q3. We don't need to measure anything — we just need a pass or fail. Why does "least count" or resolution matter to us?</div>
+        <div class="faq-a">
+          It matters because <strong>the camera needs to be able to see the defect clearly enough for the AI to make a reliable pass/fail decision</strong> — even if you never look at a measurement yourself.<br/><br/>
+          Think of it this way: if you need to catch a crack that is 0.3mm wide, and the camera's resolution means each pixel covers 0.5mm of the part surface, that crack will occupy less than one pixel in the image. It will be invisible — not because the AI missed it, but because the camera physically cannot capture it.<br/><br/>
+          "Least count" in this context simply means: <em>what is the smallest feature your camera can reliably see?</em> We size the lens and working distance so that the smallest defect you need to catch covers at least 3–5 pixels in the image. That threshold is not about measurement — it is about making sure the defect is visible enough that a consistent pass/fail call is possible.<br/><br/>
+          You set your acceptance criteria ("catch anything wider than 0.3mm"). We configure the optics so those features are always clearly visible. The AI then makes the go/no-go call — no measurements reported, no numbers to interpret.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q4. How small of a crack can the system detect?</div>
         <div class="faq-a">The minimum detectable size is determined by your quality standard. We design the camera and lens setup specifically for your parts to ensure that the smallest crack you need to find is clearly visible to the AI — typically covering at least 3–5 pixels in the image.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q2. How accurate is the AI? Can it make mistakes?</div>
+        <div class="faq-q">Q5. How accurate is the AI? Can it make mistakes?</div>
         <div class="faq-a">Accuracy is tuned during the pilot phase using your actual parts and quality criteria. The system is configured to prioritize eliminating false accepts (passing a defective part), and performance is validated against your specific thresholds before go-live. Like any AI system, accuracy improves as more production data is collected over time.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q3. How much data do we need to start, and how long does it take?</div>
+        <div class="faq-q">Q6. How much data do we need to start, and how long does it take?</div>
         <div class="faq-a">We typically need around 150 images of defective parts and 300 images of good parts to build an initial working model. The entire process — from starting data collection to a fully deployed and validated system — usually takes <strong>4 to 8 weeks</strong>. Importantly, Phase 1 (anomaly detection on good parts only) can go live from day one.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q4. Will this replace our existing MPI machine?</div>
+        <div class="faq-q">Q7. Will this replace our existing MPI machine?</div>
         <div class="faq-a">No. The PIXIQ system is a <strong>non-invasive add-on</strong>. It uses a camera to observe your current MPI process without changing your magnetization, fluid bath, or part handling fixtures.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q5. How fast is the inspection? Can it keep up with our production line?</div>
+        <div class="faq-q">Q8. How fast is the inspection? Can it keep up with our production line?</div>
         <div class="faq-a">The end-to-end cycle time — from capturing an image to sending a Pass/Fail result to your PLC — is typically <strong>less than 100 milliseconds</strong>. For a part inspected across a full 360° rotation in 20° steps (18 images), a complete surface inspection can be completed in under 2 seconds, easily keeping up with most production lines.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q6. What happens if the AI or camera stops working?</div>
+        <div class="faq-q">Q9. What happens if the AI or camera stops working?</div>
         <div class="faq-a">The system has built-in safety checks. If the AI engine fails or the camera gets disconnected, it immediately sends a "not ready" status to your PLC. This ensures no part can ever be passed through without being properly inspected.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q7. Does the operator lose control over the process?</div>
+        <div class="faq-q">Q10. Does the operator lose control over the process?</div>
         <div class="faq-a">Not at all. The operator has a full interface (HMI) that allows them to manually capture images, adjust settings, and — most importantly — override any AI decision if they see a problem. A human is always in control.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q8. How does the system handle reflections from the wet fluorescent carrier liquid?</div>
+        <div class="faq-q">Q11. How does the system handle reflections from the wet fluorescent carrier liquid?</div>
         <div class="faq-a">
           Specular reflections from the wet suspension are one of the primary imaging challenges in fluorescent MPI, and the system is designed around this from the ground up. We address it at two levels:
           <ul style="margin-top:8px; margin-bottom:0; padding-left:20px;">
@@ -853,7 +892,7 @@
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Q9. What is the false alarm rate during the early phases, and how much work does that create for operators?</div>
+        <div class="faq-q">Q12. What is the false alarm rate during the early phases, and how much work does that create for operators?</div>
         <div class="faq-a">
           During Phase 1 (anomaly baseline), the false alarm rate is intentionally elevated — the system flags anything unusual while it is still learning the normal variation of your specific parts and process. Operators can expect to review roughly <strong>5–15 flagged parts per shift</strong> in the first few weeks. This drops sharply as the model absorbs confirmed good-part variation, typically falling to <strong>under 3 per shift</strong> by the end of Phase 2.<br/><br/>
           Critically, this review burden is designed to be low-effort: the HMI routes flagged parts to a dedicated station and highlights only the region the AI questioned. The operator makes a quick confirm/dismiss decision — not a full re-inspection. Every decision is logged and fed back into the next training cycle, so the operator's time during this period directly accelerates the model's improvement.
